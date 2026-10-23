@@ -170,6 +170,10 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
 @media print { .theme { background:none; border:0; padding:0; } }
 
 /* ---------- task-grouped menu bar ---------- */
+.bar a.home { border:0; color:var(--text); margin-right:auto; }
+.bar a.home:hover strong { color:#fff; }
+.bar a.home strong { margin-right:0; }
+@media (max-width:780px) { .bar a.home { display:none; } }
 .groups { display:flex; gap:8px; align-items:center; }
 .group { display:flex; align-items:center; gap:0; border:1px solid color-mix(in srgb, var(--task) 35%, transparent); background:color-mix(in srgb, var(--task) 9%, transparent); border-radius:9px; padding:0 4px 0 10px; height:38px; }
 .group .glabel { font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--task); margin-right:4px; white-space:nowrap; }
@@ -366,13 +370,23 @@ details.facts table { font-size:14px; }
   .agenda { flex-direction:column; } .seg { flex:none !important; }
   .obj-body { padding-left:16px; }
 }
+
+/* ---------- dropdown hover fix: bridge the gap + short close delay ---------- */
+.drop::before { content:""; position:absolute; left:-10px; right:-10px; top:-16px; height:16px; }
+.subdrop::after { content:""; position:absolute; top:-10px; bottom:-10px; right:-14px; width:14px; }
+@media (hover:hover) and (min-width:781px) {
+  .drop, .subdrop { display:block; visibility:hidden; opacity:0; transition:opacity .12s ease .25s, visibility 0s linear .4s; }
+  .subdrop { transition:opacity .12s ease .45s, visibility 0s linear .6s; }
+  .menu:hover .drop, .menu.open .drop, .menu:focus-within .drop,
+  .sub:hover .subdrop, .sub:focus-within .subdrop { visibility:visible; opacity:1; transition:opacity .12s ease, visibility 0s; }
+}
 @media print { .tblock { background:none; border:0; padding:0; } .touch-detail[hidden] { display:block; } }
 
 </style>
 </head>
 <body id="top">
 <header><nav class="bar" aria-label="Main">
-  <strong>Chatbase<span class="who"> Case Study — Gabe</span></strong>
+  <a class="home" href="./" title="Reload from the top"><strong>Chatbase<span class="who"> Case Study — Gabe</span></strong></a>
   <div class="groups">
   <div class="group" style="--task:#9aa3e6"><span class="glabel">Task 1</span>
   <div class="menu" id="approach-menu">
@@ -1881,6 +1895,18 @@ details.facts table { font-size:14px; }
 })();
 </script>
 <script>
+(function(){
+  try { if (sessionStorage.getItem('toTop')) { sessionStorage.removeItem('toTop'); if ('scrollRestoration' in history) history.scrollRestoration='manual'; window.scrollTo(0,0); } } catch(err) {}
+  var home=document.querySelector('a.home');
+  if (home) home.addEventListener('click', function(ev){
+    ev.preventDefault();
+    try { sessionStorage.setItem('toTop','1'); } catch(err) {}
+    if ('scrollRestoration' in history) history.scrollRestoration='manual';
+    window.scrollTo(0,0);
+    location.replace(location.pathname + location.search);
+  });
+})();
+
 (function(){
   var dots=[].slice.call(document.querySelectorAll('.touch'));
   function show(i){
