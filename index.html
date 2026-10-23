@@ -318,6 +318,29 @@ details.facts table { font-size:14px; }
 .srcchip.fixed { color:#999; background:none; border-color:#333; }
 .formula-note { font-size:14px; color:#ccc; margin:4px 0 0; }
 .note-only { font-style:italic; margin:4px 0 10px; }
+.opens { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
+.open-item { display:flex; gap:12px; align-items:flex-start; background:#171717; border:1px solid #2a2a2a; border-radius:12px; padding:14px 16px; }
+.open-item p { margin:4px 0 0; font-size:14px; color:#ccc; }
+.quals.three { grid-template-columns:repeat(3, minmax(0,1fr)); }
+.umethod { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
+.umethod p { max-width:none; }
+.umethod .open-item:last-child { grid-column:1 / -1; border-color:color-mix(in srgb, var(--task) 45%, #2a2a2a); }
+@media (max-width:780px) { .quals.three, .umethod { grid-template-columns:1fr; } }
+
+.ucards { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
+.ucard { background:#171717; border:1px solid #2a2a2a; border-radius:12px; padding:14px 16px; }
+.ucard.wide { margin-top:10px; border-color:color-mix(in srgb, var(--task) 45%, #2a2a2a); }
+.ucard h4 { margin:2px 0 10px; font-size:15px; }
+.udate { font-size:11.5px; letter-spacing:.6px; text-transform:uppercase; color:var(--task); }
+.urow { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-top:1px solid #242424; }
+.ucard.wide .urow { border-top:0; padding:0; }
+.urow p { margin:0; font-size:13.5px; color:#ccc; max-width:none; }
+.urow ul.tight li { font-size:14px; color:#ccc; margin:4px 0; max-width:none; }
+.ustep { flex:none; width:20px; height:20px; border-radius:50%; display:grid; place-items:center; font-size:11px; font-weight:700; color:var(--task); border:1px solid color-mix(in srgb, var(--task) 60%, transparent); margin-top:2px; }
+@media (max-width:1100px) { .ucards { grid-template-columns:1fr; } }
+
+@media (max-width:1100px) { .opens { grid-template-columns:1fr; } }
+
 @media (max-width:1100px) { .frow { grid-template-columns:22px 1fr; } .frow .ftext, .frow .fsrc { grid-column:2; } }
 
 @media (max-width:1100px) {
@@ -1774,9 +1797,14 @@ details.facts table { font-size:14px; }
     <div class="callout"><span class="lbl">Strategy</span><b>A diagnosis, not a demo.</b><p>Arhaus has never said publicly that this is a problem. I need to find out if it is before pitching anything.</p></div>
     <div class="callout"><span class="lbl">Goal</span><b>One agreed next step.</b><p>A scoping session with his team and the design or retail side, or a clear "not a fit." A clear no is better than a vague maybe. It protects both our time.</p></div>
   </div>
-  <h3>Call structure</h3>
-  <div class="agenda"><div class="seg" style="flex:2"><b>2 min</b><span>Agenda</span></div><div class="seg big" style="flex:12"><b>12 min</b><span>Discovery</span></div><div class="seg" style="flex:5"><b>5 min</b><span>How a pilot would work</span></div><div class="seg" style="flex:5"><b>5 min</b><span>Next steps</span></div></div>
-  <p class="muted small-note">Most of the time goes to listening. The pilot comes only after I understand the problem.</p>
+  <h3>Call structure: 30 minutes</h3>
+  <div class="agenda"><div class="seg" style="flex:3"><b>3 min</b><span>Purpose and agenda</span></div><div class="seg big" style="flex:15"><b>15 min</b><span>Discovery</span></div><div class="seg" style="flex:7"><b>7 min</b><span>How a pilot would work</span></div><div class="seg" style="flex:5"><b>5 min</b><span>Next steps</span></div></div>
+  <h3>How I open the call</h3>
+  <div class="opens">
+    <div class="open-item"><span class="vnum">1</span><div><b>Agree on purpose and structure up front.</b><p>Before anything else, we agree on why we're meeting and how the 30 minutes will go.</p></div></div>
+    <div class="open-item"><span class="vnum">2</span><div><b>State the purpose.</b><p>Tie it back to what got us here: the pain or value point from the email or call that led to the meeting. For Arhaus, that's getting more online shoppers to a designer. The point is to see if my hypothesis actually holds for them.</p></div></div>
+    <div class="open-item"><span class="vnum">3</span><div><b>Set the agenda as mutual understanding.</b><p>We both get a clear picture of whether this is a real problem for them, and whether we're a fit to solve it.</p></div></div>
+  </div>
 </div>
 
 <div class="tblock" id="t3-discovery">
@@ -1791,18 +1819,41 @@ details.facts table { font-size:14px; }
 </div>
 
 <div class="tblock" id="t3-qual">
-  <div class="duo">
-    <div><h3>Qualification</h3>
-      <p class="muted">I use my three pillars instead of a generic checklist. It keeps qualification consistent with how I chose the account.</p>
-      <div class="quals"><div class="q"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span class="eyebrow">Pillar 1</span><b>Is there real value?</b></div></div><div class="q"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span class="eyebrow">Pillar 2</span><b>Can we win it?</b></div></div><div class="q"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span class="eyebrow">Pillar 3</span><b>Does it need an AE?</b></div></div></div>
-      <div class="flags"><span class="lbl">Red flags</span><span class="flagchip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>No owner</span><span class="flagchip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>The problem isn&#x27;t felt</span><span class="flagchip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>Nothing can move until after February</span></div>
-    </div>
-    <div><h3>Creating urgency</h3>
-      <p class="muted">Tied to their calendar, not mine. No invented deadlines or discounts.</p>
-      <div class="steps"><div class="step"><span class="dot"></span><b>Now</b><span>Fall catalog reaching twice as many households</span></div><div class="step"><span class="dot"></span><b>First 90 days</b><span>K.C. is setting his agenda</span></div><div class="step pilot"><span class="dot"></span><b>30-day pilot</b><span>Results in hand</span></div><div class="step wall"><span class="dot"></span><b>Feb 2027</b><span>ERP and order-management go-live</span></div></div>
-      <p class="muted small-note">A 30-day pilot shows results before the February go-live.</p>
-    </div>
+  <h3>Qualification</h3>
+  <p class="muted">I use my three pillars instead of a generic checklist. It keeps qualification consistent with how I chose the account.</p>
+  <div class="quals three"><div class="q"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span class="eyebrow">Pillar 1</span><b>Is there real value?</b></div></div><div class="q"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span class="eyebrow">Pillar 2</span><b>Can we win it?</b></div></div><div class="q"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span class="eyebrow">Pillar 3</span><b>Does it need an AE?</b></div></div></div>
+  <div class="flags"><span class="lbl">Red flags</span><span class="flagchip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>No owner</span><span class="flagchip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>The problem isn&#x27;t felt</span><span class="flagchip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>Nothing can move until after February</span></div>
+</div>
+
+<div class="tblock" id="t3-urgency">
+  <h3>Creating urgency</h3>
+  <p class="muted">Tied to their calendar, not mine. No invented deadlines or discounts.</p>
+  <div class="umethod">
+    <div class="open-item"><span class="vnum">1</span><div><b>Find real events on their calendar.</b><p>Things already happening on their side that I picked up in my research: earnings calls, filings, press releases, leadership changes, launches.</p></div></div>
+    <div class="open-item"><span class="vnum">2</span><div><b>Show what waiting costs them.</b><p>For each event, what they lose or miss by waiting, in their terms, not mine.</p></div></div>
+    <div class="open-item"><span class="vnum">3</span><div><b>Show what acting now makes possible.</b><p>A small step that fits the timing, so moving now feels easy instead of risky.</p></div></div>
+    <div class="open-item"><span class="vnum">4</span><div><b>Take on their homework.</b><p>Depending on how discovery went, I offer a low-friction next step: a small test, or a follow-up meeting to work through any objections or questions that came up. Basically I take their issue back and do the work of figuring out if we can solve it, for free. If what we could solve is worth way more than another 30 minutes or a short pilot, the next step doesn't really cost them anything. It shows I'm flexible and taking initiative on their problem, and it takes the friction out of saying yes.</p></div></div>
   </div>
+  <h3>Applied to Arhaus</h3>
+  <div class="ucards"><div class="ucard"><span class="udate">Aug 2026 · Q2 call</span><h4>The fall catalog is reaching twice as many households</h4>
+      <div class="urow"><span class="ustep">1</span><div><span class="lbl">Event</span><p>The anniversary catalog is going to more than twice as many households as spring, including people who&#x27;ve never bought from Arhaus.</p></div></div>
+      <div class="urow"><span class="ustep">2</span><div><span class="lbl">What waiting costs</span><p>Those first-time shoppers are on the site right now, asking about size, fabric and delivery. Any who get stuck and leave before reaching a designer are lost, and design-assisted orders are worth 4× a standard order. Catalog season doesn&#x27;t wait for a later start date.</p></div></div>
+      <div class="urow"><span class="ustep">3</span><div><span class="lbl">What acting now makes possible</span><p>A pilot on sofas and sectionals catches some of that traffic while it&#x27;s still coming in.</p></div></div></div><div class="ucard"><span class="udate">Sept 30, 2026</span><h4>K.C. Moss started as Arhaus&#x27;s first Chief Digital Officer</h4>
+      <div class="urow"><span class="ustep">1</span><div><span class="lbl">Event</span><p>A new executive in his first 90 days, which runs to roughly the end of December.</p></div></div>
+      <div class="urow"><span class="ustep">2</span><div><span class="lbl">What waiting costs</span><p>New leaders usually lock in their priorities early. If this isn&#x27;t on his list by then, it likely waits for the next planning cycle. That&#x27;s my assumption, so I&#x27;d check it on the call: &quot;Would this be a priority over the coming few months or so?&quot;</p></div></div>
+      <div class="urow"><span class="ustep">3</span><div><span class="lbl">What acting now makes possible</span><p>A small pilot gives him an early, low-risk win to show inside that window.</p></div></div></div><div class="ucard"><span class="udate">This quarter → Feb 2027</span><h4>Point-of-sale goes live this quarter, ERP and order management in February</h4>
+      <div class="urow"><span class="ustep">1</span><div><span class="lbl">Event</span><p>A large systems program is in progress.</p></div></div>
+      <div class="urow"><span class="ustep">2</span><div><span class="lbl">What waiting costs</span><p>If we wait until after February, his team is busy settling the new systems and we start from zero then.</p></div></div>
+      <div class="urow"><span class="ustep">3</span><div><span class="lbl">What acting now makes possible</span><p>A pilot that uses only the Shopify catalog and published policies needs almost nothing from his IT team, so it can run now without competing with the systems work. Once order data is live after February, he already has results to decide on the next phase (order status, returns, trade).</p></div></div></div></div>
+  <div class="ucard wide"><div class="urow"><span class="ustep">4</span><div><span class="lbl">Take on their homework: the next step I offer</span>
+    <ul class="tight">
+      <li><b>If discovery went well:</b> we set up the 30-day pilot ourselves on one category. Starting in November means results in December, inside his first 90 days and before the go-live.</li>
+      <li><b>If concerns came up</b> (accuracy across 800 fabrics, protecting the designer experience): I offer a follow-up 30 minutes where I bring back test answers to their real questions, so they can judge quality before committing to anything.</li>
+      <li><b>Either way:</b> it costs them a meeting or a month, compared with the value of getting more online shoppers to designers.</li>
+    </ul></div></div></div>
+  <h3>How the timing lines up</h3>
+  <div class="steps"><div class="step"><span class="dot"></span><b>Aug 2026 · Fall catalog announced (2× households)</b><span>More first-time buyers are on the site now</span></div><div class="step"><span class="dot"></span><b>Sept 30, 2026 · K.C. starts as CDO</b><span>His first 90 days run to about the end of December</span></div><div class="step pilot"><span class="dot"></span><b>Nov 2026 · First call, then pilot starts</b><span>Uses only catalog and policies, so no IT load during the point-of-sale rollout</span></div><div class="step pilot"><span class="dot"></span><b>Dec 2026 · Pilot results</b><span>An early win, inside his first 90 days</span></div><div class="step wall"><span class="dot"></span><b>Feb 2027 · ERP and order-management go-live</b><span>Results already in hand to decide on the next phase once order data is live</span></div></div>
+  <p class="muted small-note">Starting in November lands results inside his first 90 days and before the go-live, without adding work to the systems program.</p>
 </div>
 
 <div class="tblock" id="t3-objections">
