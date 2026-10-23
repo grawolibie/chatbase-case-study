@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chatbase Case Study — Task 1</title>
+<title>Chatbase Case Study</title>
 <style>
 :root { color-scheme: dark; --bg:#191919; --card:#141414; --line:#2a2a2a; --text:#eee; --muted:#aaa; --soft:#202020; }
 * { box-sizing:border-box; }
@@ -30,8 +30,13 @@ body { padding-top:52px; }
 .subdrop { display:none; position:absolute; right:100%; top:-7px; margin-right:6px; min-width:180px; background:#1e1e1e; border:1px solid #3a3a3a; border-radius:8px; padding:6px; box-shadow:0 10px 30px rgba(0,0,0,.45); }
 @media (hover:hover) { .menu:hover .drop, .sub:hover .subdrop { display:block; } }
 .menu.open .drop, .menu:focus-within .drop, .sub:focus-within .subdrop { display:block; }
+@media (max-width:1180px) { .who { display:none; } }
 @media (max-width:780px) {
-  .bar strong { font-size:14px; white-space:nowrap; } .who, .long { display:none; }
+  .bar strong { display:none; } .long { display:none; }
+  .groups { overflow-x:auto; scrollbar-width:none; gap:6px; width:100%; }
+  .groups::-webkit-scrollbar { display:none; }
+  .group { flex:none; height:36px; padding-left:8px; }
+  .group .glabel { font-size:9.5px; }
   .drop { position:fixed; top:52px; left:12px; right:12px; }
   .menu > a, .menu > button { padding:15px 8px; font-size:14px; }
   .subdrop { display:block; position:static; border:0; box-shadow:none; padding:0 0 0 14px; min-width:0; background:none; }
@@ -163,11 +168,166 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
 .theme > h3:first-child { margin-top:22px; padding-bottom:12px; border-bottom:1px solid #2b2b2b; }
 @media (max-width:780px) { .theme { padding:2px 16px 16px; } }
 @media print { .theme { background:none; border:0; padding:0; } }
+
+/* ---------- task-grouped menu bar ---------- */
+.groups { display:flex; gap:8px; align-items:center; }
+.group { display:flex; align-items:center; gap:0; border:1px solid color-mix(in srgb, var(--task) 35%, transparent); background:color-mix(in srgb, var(--task) 9%, transparent); border-radius:9px; padding:0 4px 0 10px; height:38px; }
+.group .glabel { font-size:10.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--task); margin-right:4px; white-space:nowrap; }
+.group .menu > a, .group .menu > button { padding:9px 9px; }
+.group .menu > a:hover, .group .menu > button:hover, .group .menu.open > button { color:#fff; }
+.group.single { padding-right:10px; }
+.group.single a { color:#ddd; border:0; white-space:nowrap; padding:9px 0 9px 4px; }
+.group.single a:hover { color:#fff; }
+.group .drop { top:calc(100% + 8px); }
+/* ---------- task sections ---------- */
+.task { --task:#888; }
+.task .kicker { color:var(--task); }
+.lede { font-size:17px; color:#ccc; max-width:none; }
+.tblock { background:#1c1c1c; border:1px solid #2b2b2b; border-top:2px solid color-mix(in srgb, var(--task) 55%, #2b2b2b); border-radius:14px; padding:4px 28px 24px; margin:22px 0; }
+.tblock > h3:first-child, .tblock h3:first-of-type { margin-top:20px; }
+.tblock h3 { margin:26px 0 10px; }
+.lbl { display:block; font-size:11px; letter-spacing:.9px; text-transform:uppercase; color:#8a8a8a; margin-bottom:3px; }
+.stats { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; margin-top:6px; }
+.stat { background:#171717; border:1px solid #2a2a2a; border-radius:12px; padding:16px; }
+.stat b { display:block; font-size:30px; line-height:1.1; color:var(--task); margin-bottom:6px; }
+.stat span { color:#bbb; font-size:13.5px; }
+.minis { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:10px; }
+.mini { background:#171717; border:1px solid #2a2a2a; border-radius:12px; padding:14px; }
+.mini .icon { stroke:var(--task); margin-bottom:6px; }
+.mini b { display:block; font-size:14px; margin-bottom:4px; }
+.mini span { color:#aaa; font-size:13px; }
+.committee { display:grid; grid-template-columns:1fr 36px 1.15fr 36px 1fr; grid-template-rows:auto 34px auto; align-items:center; }
+.node { background:#171717; border:1px solid #2f2f2f; border-radius:12px; padding:14px 16px; }
+.node b { display:block; font-size:16px; } .node small { margin:0 0 6px; } .node p { margin:0; font-size:13.5px; color:#bbb; }
+.node .role { display:inline-block; font-size:10.5px; letter-spacing:1px; text-transform:uppercase; color:#999; margin-bottom:6px; }
+.node.primary { border-color:var(--task); box-shadow:0 0 0 1px color-mix(in srgb, var(--task) 40%, transparent) inset; }
+.node.primary .role { color:var(--task); }
+.node.held { grid-column:3; grid-row:3; border-style:dashed; opacity:.75; }
+.link-h { height:1px; background:#555; }
+.link-v { grid-column:3; grid-row:2; width:1px; height:100%; background:repeating-linear-gradient(#555 0 4px, transparent 4px 8px); justify-self:center; }
+.legend { display:flex; flex-wrap:wrap; gap:6px 16px; align-items:center; font-size:12.5px; color:#aaa; margin:6px 0 12px; }
+.legend-c { display:inline-flex; gap:6px; align-items:center; }
+.legend.tags { gap:6px 8px; margin-top:14px; }
+.legend-i { display:inline-flex; gap:6px; align-items:center; margin-right:14px; }
+@media (max-width:780px) { .legend-i { margin-right:0; width:100%; } }
+.tagchip { display:inline-block; font-size:10.5px; letter-spacing:.6px; text-transform:uppercase; border-radius:4px; padding:2px 6px; border:1px solid #444; color:#ccc; white-space:nowrap; }
+.tag-access { border-color:#555; color:#aaa; }
+.tag-p1 { border-color:#6b86b8; color:#a9c0ea; }
+.tag-p2 { border-color:#5f9d9a; color:#9fd5cf; }
+.tag-ae { border-color:#b0894f; color:#e3bd85; }
+.tag-ref { border-color:#8a6aa6; color:#c9a8e6; }
+.timeline { position:relative; display:grid; grid-template-columns:72px repeat(21, minmax(0,1fr)); grid-template-rows:repeat(3, 64px) 26px; background:#161616; border:1px solid #2a2a2a; border-radius:12px; padding:8px 12px 4px; }
+.timeline::before { content:""; position:absolute; left:84px; right:12px; top:8px; bottom:30px; background:repeating-linear-gradient(to bottom, transparent 0 63px, #262626 63px 64px); pointer-events:none; }
+.lane-label { grid-column:1; grid-row:var(--lane); align-self:center; font-size:13px; color:#bbb; }
+.axis { grid-column:2 / -1; grid-row:4; position:relative; display:grid; grid-template-columns:repeat(21, minmax(0,1fr)); }
+.tick { grid-column:var(--day); font-size:11px; color:#777; text-align:center; }
+.tick::before { content:"Day "; }
+.touch { grid-column:calc(var(--day) + 1); grid-row:var(--lane); justify-self:center; align-self:center; width:40px; height:40px; border-radius:50%; background:#202020; border:1px solid #4a4a4a; color:#ddd; display:grid; place-items:center; cursor:pointer; padding:0; position:relative; z-index:1; transition:transform .12s, border-color .12s; }
+.touch .icon { stroke:#cfcfcf; }
+.touch:hover { transform:scale(1.08); border-color:#999; }
+.touch.active { border-color:var(--task); background:color-mix(in srgb, var(--task) 22%, #1d1d1d); box-shadow:0 0 0 3px color-mix(in srgb, var(--task) 25%, transparent); }
+.touch.active .icon { stroke:#fff; }
+.touch .t-day, .touch .t-meta, .touch .t-angle, .touch .tagchip { display:none; }
+.touch.tag-p1 { border-color:#6b86b8; } .touch.tag-p2 { border-color:#5f9d9a; } .touch.tag-ae { border-color:#b0894f; } .touch.tag-ref { border-color:#8a6aa6; }
+.touch-panel { margin-top:14px; }
+.touch-detail { background:#171717; border:1px solid #2a2a2a; border-radius:12px; padding:16px 20px; }
+.td-head { display:flex; flex-wrap:wrap; gap:10px; align-items:center; color:#ccc; }
+.td-head > span { display:inline-flex; gap:6px; align-items:center; }
+.td-day { font-weight:700; color:var(--task); }
+.td-angle { font-size:17px; margin:8px 0 12px; }
+.msg { background:#121212; border:1px solid #262626; border-radius:10px; padding:4px 18px 8px; margin-bottom:10px; max-width:760px; }
+.msg-head { display:flex; gap:8px; align-items:center; color:#bbb; padding:10px 0 8px; border-bottom:1px solid #242424; margin-bottom:6px; }
+.msg p { margin:8px 0; color:#ddd; }
+.td-notes { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px; }
+.td-notes p { margin:0; color:#ccc; }
+.branches { display:grid; gap:8px; }
+.branch { display:grid; grid-template-columns:minmax(180px, 0.9fr) 24px 2fr; gap:12px; align-items:center; background:#171717; border:1px solid #2a2a2a; border-radius:10px; padding:10px 14px; }
+.branch .if { font-weight:600; }
+.branch .then { color:#ccc; font-size:14px; }
+.branch .icon { stroke:var(--task); }
+details.facts summary { cursor:pointer; list-style:none; display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; padding:14px 0 4px; }
+details.facts summary::-webkit-details-marker { display:none; }
+details.facts summary h3 { margin:0; }
+details.facts summary::after { content:"Show ▾"; margin-left:auto; font-size:12px; color:#999; }
+details.facts[open] summary::after { content:"Hide ▴"; }
+details.facts table { font-size:14px; }
+.duo { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.callout { background:#171717; border:1px solid #2a2a2a; border-left:3px solid var(--task); border-radius:10px; padding:14px 18px; margin-top:20px; }
+.callout b { display:block; font-size:18px; margin-bottom:4px; } .callout p { margin:0; color:#bbb; font-size:14px; }
+.agenda { display:flex; gap:4px; border-radius:10px; overflow:hidden; }
+.seg { background:#262626; padding:12px 12px; min-width:0; }
+.seg b { display:block; font-size:15px; white-space:nowrap; } .seg span { font-size:12.5px; color:#bbb; display:block; }
+.seg.big { background:color-mix(in srgb, var(--task) 30%, #1f1f1f); }
+.small-note { font-size:13px; margin-top:8px; }
+.dcols { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px; }
+.dcol { background:#171717; border:1px solid #2a2a2a; border-radius:12px; padding:14px 16px; display:flex; flex-direction:column; }
+.dcol h4 { margin:0 0 10px; }
+.ask { display:flex; gap:10px; align-items:flex-start; background:#121212; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
+.ask p { margin:0; font-size:14px; }
+.tests { margin:auto 0 0; padding-top:8px; font-size:13px; color:#9a9a9a; border-top:1px solid #262626; }
+.quals { display:grid; gap:8px; margin:10px 0 14px; }
+.q { display:flex; gap:12px; align-items:center; background:#171717; border:1px solid #2a2a2a; border-radius:10px; padding:10px 14px; }
+.q .icon { stroke:var(--task); } .q .eyebrow { margin:0; font-size:10.5px; } .q b { display:block; }
+.flags { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.flags .lbl { width:100%; }
+.flagchip { display:inline-flex; gap:6px; align-items:center; font-size:13px; border:1px solid #5a3a3a; background:#241a1a; color:#e0b4b4; border-radius:20px; padding:4px 10px 4px 6px; }
+.flagchip .icon { stroke:#d48f8f; width:15px; height:15px; }
+.steps { position:relative; display:grid; gap:0; margin-top:12px; padding-left:8px; }
+.step { position:relative; padding:0 0 18px 26px; border-left:2px solid #3a3a3a; margin-left:6px; }
+.step:last-child { padding-bottom:0; }
+.step .dot { position:absolute; left:-8px; top:3px; width:14px; height:14px; border-radius:50%; background:#1c1c1c; border:2px solid #777; }
+.step b { display:block; } .step span { color:#bbb; font-size:14px; }
+.step.pilot .dot { background:var(--task); border-color:var(--task); }
+.step.pilot b { color:var(--task); }
+.step.wall { border-left-color:transparent; }
+.step.wall .dot { border-radius:3px; border-color:#b56a6a; }
+.objs { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:10px; align-items:start; }
+.obj { background:#171717; border:1px solid #2a2a2a; border-radius:12px; }
+.obj summary { list-style:none; cursor:pointer; display:flex; gap:10px; align-items:flex-start; padding:14px 16px; font-weight:600; }
+.obj summary::-webkit-details-marker { display:none; }
+.obj summary .icon { stroke:var(--task); margin-top:2px; }
+.obj summary::after { content:"+"; margin-left:auto; color:#888; font-weight:400; }
+.obj[open] summary::after { content:"−"; }
+.obj[open] { border-color:color-mix(in srgb, var(--task) 50%, #2a2a2a); }
+.obj-body { padding:0 16px 14px 44px; }
+.obj-body p { margin:0 0 10px; font-size:14px; color:#ccc; }
+.risks { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.risk { display:flex; gap:12px; background:#161616; border:1px dashed #3a3a3a; border-radius:12px; padding:14px 16px; }
+.risk p { margin:4px 0 0; font-size:14px; color:#ccc; }
+.crosslink { display:inline-flex; gap:14px; flex-wrap:wrap; font-size:13px; margin:-4px 0 10px; }
+.crosslink a { color:#bbb; }
+@media (max-width:1100px) {
+  .minis { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .stats { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .dcols { grid-template-columns:1fr; }
+}
+@media (max-width:780px) {
+  .tblock { padding:2px 16px 18px; }
+  .minis, .stats, .duo, .td-notes, .risks { grid-template-columns:1fr; }
+  .committee { grid-template-columns:1fr; grid-template-rows:none; gap:10px; }
+  .committee .link-h, .committee .link-v { display:none; }
+  .node.held { grid-column:auto; grid-row:auto; }
+  .timeline { display:flex; flex-direction:column; gap:6px; background:none; border:0; padding:0; }
+  .timeline::before, .lane-label, .axis { display:none; }
+  .touch { width:100%; height:auto; border-radius:10px; display:grid; grid-template-columns:22px 52px 1fr; grid-template-rows:auto auto; gap:2px 8px; justify-items:start; text-align:left; padding:10px 12px; }
+  .touch:hover { transform:none; }
+  .touch .icon { grid-row:1 / 3; align-self:center; }
+  .touch .t-day { display:block; font-weight:700; font-size:13px; }
+  .touch .t-meta { display:block; font-size:13px; color:#ccc; }
+  .touch .t-angle { display:block; grid-column:2 / 4; font-size:13px; color:#aaa; }
+  .branch { grid-template-columns:1fr; gap:4px; } .branch .icon { display:none; }
+  .agenda { flex-direction:column; } .seg { flex:none !important; }
+  .obj-body { padding-left:16px; }
+}
+@media print { .tblock { background:none; border:0; padding:0; } .touch-detail[hidden] { display:block; } }
+
 </style>
 </head>
 <body id="top">
 <header><nav class="bar" aria-label="Main">
   <strong>Chatbase<span class="who"> Case Study — Gabe</span></strong>
+  <div class="groups">
+  <div class="group" style="--task:#9aa3e6"><span class="glabel">Task 1</span>
   <div class="menu" id="approach-menu">
     <button type="button" aria-haspopup="true" aria-expanded="false"><span class="long">My </span>Approach <span class="caret">▾</span></button>
     <div class="drop">
@@ -187,15 +347,19 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
       <a href="#arhaus"><span class="num">01</span>Arhaus</a><a href="#bauer"><span class="num">02</span>Bauer Hockey</a><a href="#ruggable"><span class="num">03</span>Ruggable</a><a href="#turtle-beach"><span class="num">04</span>Turtle Beach</a><a href="#escalade"><span class="num">05</span>Escalade Sports</a><a href="#capezio"><span class="num">06</span>Capezio</a><a href="#nanoleaf"><span class="num">07</span>Nanoleaf</a><a href="#mustang"><span class="num">08</span>Mustang Survival</a><a href="#planeta-huerto"><span class="num">09</span>Planeta Huerto</a><a href="#footdistrict"><span class="num">10</span>FOOTDISTRICT</a>
     </div>
   </div>
+  </div>
+  <div class="group single" style="--task:#7cc49a"><span class="glabel">Task 2</span><a href="#task2"><span class="long">Outbound </span>Sequence</a></div>
+  <div class="group single" style="--task:#d9a066"><span class="glabel">Task 3</span><a href="#task3">First Call</a></div>
+  </div>
 </nav></header>
 <main>
 <div class="prose">
 <h1>Task 1: Target</h1>
 <p>The question I used to guide everything: <b>where does an AE add value that the product can't deliver on its own?</b> Chatbase is built to be self-served, so if I can't answer that, I'm chasing customers who would sign up anyway.</p>
-<p class="muted">This site covers how I defined the ICP and chose my 10 accounts, plus a brief for each account. My outreach sequence and first-call plan (Tasks 2 and 3) are in the presentation.</p>
+<p class="muted">This site covers how I defined the ICP and chose my 10 accounts, plus a brief for each account. My outreach sequence and first-call plan for my #1 account are in Tasks 2 and 3, further down.</p>
 
 <!-- ============ SECTION 1 ============ -->
-<h2 id="approach" class="section-head"><span class="kicker">Section 1</span>My Approach</h2>
+<h2 id="approach" class="section-head"><span class="kicker" style="color:#9aa3e6">Task 1 · Part 1</span>My Approach</h2>
 
 <div class="toc">
   <b>Four parts:</b>
@@ -404,7 +568,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
 
 
 </div>
-<h2 id="briefs" class="section-head"><span class="kicker">Section 2</span>Account Briefs</h2>
+<h2 id="briefs" class="section-head"><span class="kicker" style="color:#9aa3e6">Task 1 · Part 2</span>Account Briefs</h2>
 <p class="muted">Each brief follows the three pillars. Pillar 1 angles are ordered by rubric score; Pillars 2 and 3 show only what scored 2 or higher. Names and titles come from public sources and would be confirmed before outreach.</p>
 <nav class="nav"><a href="#arhaus">01 · ARHAUS</a><a href="#bauer">02 · BAUER HOCKEY</a><a href="#ruggable">03 · RUGGABLE</a><a href="#turtle-beach">04 · TURTLE BEACH</a><a href="#escalade">05 · ESCALADE SPORTS</a><a href="#capezio">06 · CAPEZIO</a><a href="#nanoleaf">07 · NANOLEAF</a><a href="#mustang">08 · MUSTANG SURVIVAL</a><a href="#planeta-huerto">09 · PLANETA HUERTO</a><a href="#footdistrict">10 · FOOTDISTRICT</a></nav>
 
@@ -417,6 +581,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>2.53</b> Total</span><span><b>Pass (A2 = 4)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with design-led buying guidance online. Treat designer and showroom support as the second angle.</p>
+  <p class="crosslink"><a href="#task2">Outbound sequence (Task 2) →</a><a href="#task3">First-call plan (Task 3) →</a></p>
   <div class="logic"><b>Rubric → strategy.</b> R1 = 4 and R3 = 4 make guided buying the lead. O1 = 3 and O3 = 3 support a second angle around designers and showrooms. Support criteria score 1 (no evidence yet), so support savings stay a discovery question. Strongest AE reason: A2 = 4, three separate buyer journeys.</div>
 
   <div class="cols">
@@ -489,7 +654,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
         <td data-label="What it means"><b>A team that has rolled out platform changes before.</b><small>Caveat: Bandwidth is tight until February.</small></td>
         <td data-label="Signal · source">Proven Shopify implementation<small><a href="https://www.shopify.com/case-studies/arhaus" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
-    <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Lead with K.C. Moss using the 4× design-assisted figure. Open a second thread with Kathy Veltri on designer time. Offer a pilot that stays clear of the ERP rollout. The full sequence is in my presentation.</p></div></div>
+    <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Lead with K.C. Moss using the 4× design-assisted figure. Open a second thread with Kathy Veltri on designer time. Offer a pilot that stays clear of the ERP rollout. The full sequence is in Task 2.</p></div></div>
   </section>
 
   <section class="section">
@@ -532,6 +697,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>1.94</b> Total</span><span><b>Pass (A3 = 4)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with warranty and returns help. Test sizing guidance as a second angle.</p>
+  
   <div class="logic"><b>Rubric → strategy.</b> S3 = 3 makes post-purchase help the lead. R1 and R2 score 2, so sizing guidance is a plausible second angle. Operational criteria score 1. Strongest AE reason: A3 = 4, integrations beyond Chatbase&#x27;s built-in actions.</div>
 
   <div class="cols">
@@ -627,6 +793,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>1.95</b> Total</span><span><b>Pass (A2/A4 = 3)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with buying guidance on size and material. Test care, shipping and returns questions as the second angle.</p>
+  
   <div class="logic"><b>Rubric → strategy.</b> R1, R2, S1–S3, O2 and O3 all score 2: several plausible angles, none proven yet. I lead with buying guidance because it carries the most weight, and treat support as second. Strongest AE reason: A2 = 3 and A4 = 3, separate stores per region.</div>
 
   <div class="cols">
@@ -722,6 +889,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>1.88</b> Total</span><span><b>Pass (A2/A3 = 3)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with compatibility guidance. Technical knowledge across regions is the second angle.</p>
+  
   <div class="logic"><b>Rubric → strategy.</b> R1 = 3 and R2 = 3 make compatibility guidance the lead. O1 = 3 supports technical knowledge. S1 = 2 makes setup help a discovery angle. Strongest AE reason: A2 = 3 and A3 = 3, nine storefronts on a headless setup.</div>
 
   <div class="cols">
@@ -832,6 +1000,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>1.83</b> Total</span><span><b>Pass (A2/A4 = 4)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with product guidance on each brand. The multi-brand setup is the AE case.</p>
+  
   <div class="logic"><b>Rubric → strategy.</b> R1, R2 and S1 score 2, and O3 = 3: guidance is plausible on each brand, and keeping 11 brands consistent is the clearest operational angle. Strongest AE reasons: A2 = 4 and A4 = 4, eleven brands.</div>
 
   <div class="cols">
@@ -947,6 +1116,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>1.76</b> Total</span><span><b>Pass (A2/A3 = 3)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with fit and selection guidance. Specialist fitting knowledge is the second angle.</p>
+  
   <div class="logic"><b>Rubric → strategy.</b> R1 = 3 and R2 = 3 make fit guidance the lead. O1 = 3 supports specialist knowledge. Post-purchase support scores 1, so it stays a discovery question. Strongest AE reason: A2 = 3 and A3 = 3, separate US, UK and EU operations.</div>
 
   <div class="cols">
@@ -1057,6 +1227,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>1.72</b> Total</span><span><b>Pass (A2/A3 = 3)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with compatibility before purchase. Setup and troubleshooting is the second angle. Toronto-based.</p>
+  
   <div class="logic"><b>Rubric → strategy.</b> R1, R2, S1 and O1–O3 all score 2: plausible on several fronts, none proven. I lead with pre-purchase compatibility and treat setup support as second. Strongest AE reason: A2 = 3 and A3 = 3, multi-region selling on a headless storefront with an ERP.</div>
 
   <div class="cols">
@@ -1152,6 +1323,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>1.73</b> Total</span><span><b>Pass (A2/A3/A4 = 3)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with safety-gear selection for recreational buyers. Serve professional buyers separately.</p>
+  
   <div class="logic"><b>Rubric → strategy.</b> R1, R2, O1 and O3 score 2: selection guidance and specialist knowledge are plausible. Support scores 1. Strongest AE reasons: A2, A3 and A4 = 3, two country stores on an ERP with expansion planned.</div>
 
   <div class="cols">
@@ -1267,6 +1439,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>1.71</b> Total</span><span><b>Pass (A3 = 4)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with marketplace product discovery. Mixed-basket shipping questions are the distinctive second angle.</p>
+  
   <div class="logic"><b>Rubric → strategy.</b> R1 = 2 and R2 = 2 support discovery. S2 = 2 and O3 = 3 point to shipping questions across sellers and systems. Strongest AE reason: A3 = 4, Shopify, Mirakl and Odoo.</div>
 
   <div class="cols">
@@ -1366,6 +1539,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <span><b>1.49</b> Total</span><span><b>Pass (A3 = 3)</b> AE gate</span>
   </div>
   <p class="thesis">Lead with sneaker sizing guidance. Multilingual consistency is the second angle. The weakest account that passed.</p>
+  
   <div class="logic"><b>Rubric → strategy.</b> R1 = 2 and R2 = 2 support sizing guidance. O3 = 2 supports multilingual consistency. S3 = 2 makes returns a discovery angle. Strongest AE reason: A3 = 3, returns run through Reveni and need custom actions.</div>
 
   <div class="cols">
@@ -1463,6 +1637,143 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   </div>
   </div>
 </article>
+
+<section class="task" id="task2" style="--task:#7cc49a">
+<h2 class="section-head"><span class="kicker">Task 2</span>Outbound Sequence: Arhaus</h2>
+<p class="lede">How I'd open my #1 account: 21 days, three people, and a clear exit. Click any touch on the timeline to read it.</p>
+
+<div class="tblock" id="t2-why">
+  <h3>Why Arhaus</h3>
+  <p class="muted">Ranked #1 on my scored list. A new-adoption opportunity with no incumbent to displace.</p>
+  <div class="stats"><div class="stat"><b>4×</b><span>Design-assisted orders vs. a standard order</span></div><div class="stat"><b>5 × 800</b><span>Sizes × fabrics for a single piece</span></div><div class="stat"><b>3</b><span>Buyer journeys: consumer, trade, contract</span></div><div class="stat"><b>0</b><span>Chat or helpdesk tools to displace</span></div></div>
+</div>
+
+<div class="tblock" id="t2-who">
+  <h3>Who and why</h3>
+  
+<div class="committee">
+  <div class="node side"><span class="role">Second thread</span><b>Kathy Veltri</b><small>Chief Retail Officer</small><p>Owns showrooms and the designers' time.</p></div>
+  <div class="link-h"></div>
+  <div class="node primary"><span class="role">Primary</span><b>K.C. Moss</b><small>Chief Digital Officer</small><p>Newly appointed as Arhaus's first CDO; owns ecommerce and digital and is building an agenda.</p></div>
+  <div class="link-h"></div>
+  <div class="node side"><span class="role">Referral path</span><b>Steve Bauer</b><small>SVP Marketing</small><p>Owns the fall catalog that's driving new demand.</p></div>
+  <div class="link-v"></div>
+  <div class="node held"><span class="role">Held until interest</span><b>Allison Sutley</b><small>CIO</small><p>Security and integration review once there's a deal to scope.</p></div>
+</div>
+</div>
+
+<div class="tblock" id="t2-map">
+  <h3>The map: 21 days</h3>
+  <div class="legend"><span class="legend-c"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email</span><span class="legend-c"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Call + voicemail</span><span class="legend-c"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M19 8v6M16 11h6"/></svg> LinkedIn connect</span><span class="legend-c"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg> LinkedIn message</span></div>
+  <div class="timeline">
+    <div class="lane-label" style="--lane:1">Moss</div><div class="lane-label" style="--lane:2">Veltri</div><div class="lane-label" style="--lane:3">Bauer</div>
+    <div class="axis"><span class="tick" style="--day:1">1</span><span class="tick" style="--day:7">7</span><span class="tick" style="--day:14">14</span><span class="tick" style="--day:21">21</span></div>
+    <button type="button" class="touch tag-access" data-i="0" style="--day:1;--lane:1" aria-controls="touch-0" aria-label="Day 1, LinkedIn connect to Moss"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M19 8v6M16 11h6"/></svg><span class="t-day">Day 1</span><span class="t-meta"><b>LinkedIn connect</b> · Moss</span><span class="t-angle">Congratulations, no pitch</span><span class="tagchip">Access</span></button><button type="button" class="touch tag-p2" data-i="1" style="--day:2;--lane:1" aria-controls="touch-1" aria-label="Day 2, Email 1 to Moss"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="t-day">Day 2</span><span class="t-meta"><b>Email 1</b> · Moss</span><span class="t-angle">Design-assisted orders are worth 4×</span><span class="tagchip">Pillar 2</span></button><button type="button" class="touch tag-access" data-i="2" style="--day:4;--lane:1" aria-controls="touch-2" aria-label="Day 4, Call and voicemail to Moss"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span class="t-day">Day 4</span><span class="t-meta"><b>Call and voicemail</b> · Moss</span><span class="t-angle">Follow-up on email 1</span><span class="tagchip">Access</span></button><button type="button" class="touch tag-p2" data-i="3" style="--day:7;--lane:1" aria-controls="touch-3" aria-label="Day 7, Email 2 to Moss"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="t-day">Day 7</span><span class="t-meta"><b>Email 2</b> · Moss</span><span class="t-angle">Fall catalog going to 2× the households</span><span class="tagchip">Pillar 2</span></button><button type="button" class="touch tag-p1" data-i="4" style="--day:9;--lane:2" aria-controls="touch-4" aria-label="Day 9, Email to Veltri"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="t-day">Day 9</span><span class="t-meta"><b>Email</b> · Veltri</span><span class="t-angle">Designers&#x27; time is the scarce resource</span><span class="tagchip">Pillar 1</span></button><button type="button" class="touch tag-ae" data-i="5" style="--day:11;--lane:1" aria-controls="touch-5" aria-label="Day 11, LinkedIn message to Moss"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg><span class="t-day">Day 11</span><span class="t-meta"><b>LinkedIn message</b> · Moss</span><span class="t-angle">Trade program adding thousands of members a month</span><span class="tagchip">AE gate</span></button><button type="button" class="touch tag-ae" data-i="6" style="--day:14;--lane:1" aria-controls="touch-6" aria-label="Day 14, Email 3 to Moss"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="t-day">Day 14</span><span class="t-meta"><b>Email 3</b> · Moss</span><span class="t-angle">A pilot that avoids the ERP project</span><span class="tagchip">AE gate</span></button><button type="button" class="touch tag-access" data-i="7" style="--day:15;--lane:1" aria-controls="touch-7" aria-label="Day 15, Call and voicemail to Moss"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span class="t-day">Day 15</span><span class="t-meta"><b>Call and voicemail</b> · Moss</span><span class="t-angle">Follow-up on the pilot idea</span><span class="tagchip">Access</span></button><button type="button" class="touch tag-ref" data-i="8" style="--day:18;--lane:3" aria-controls="touch-8" aria-label="Day 18, Email to Bauer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="t-day">Day 18</span><span class="t-meta"><b>Email</b> · Bauer</span><span class="t-angle">Who owns first-time-buyer questions?</span><span class="tagchip">Referral</span></button><button type="button" class="touch tag-p2" data-i="9" style="--day:21;--lane:1" aria-controls="touch-9" aria-label="Day 21, Breakup email to Moss"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="t-day">Day 21</span><span class="t-meta"><b>Breakup email</b> · Moss</span><span class="t-angle">Close the loop until after February</span><span class="tagchip">Pillar 2</span></button>
+  </div>
+  <div class="legend tags"><span class="legend-i"><span class="tagchip tag-access">Access</span><span class="legend-d">Reachability and name recognition</span></span><span class="legend-i"><span class="tagchip tag-p2">Pillar 2</span><span class="legend-d">Problem recognition, timing</span></span><span class="legend-i"><span class="tagchip tag-p1">Pillar 1</span><span class="legend-d">A second pain point and champion</span></span><span class="legend-i"><span class="tagchip tag-ae">AE gate</span><span class="legend-d">Pillar 3: why this needs a scoped deal</span></span><span class="legend-i"><span class="tagchip tag-ref">Referral</span><span class="legend-d">A path in if the primary is silent</span></span></div>
+  <div class="touch-panel" aria-live="polite"><div class="touch-detail" id="touch-0" >
+  <div class="td-head"><span class="td-day">Day 1</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M19 8v6M16 11h6"/></svg> LinkedIn connect → <b>Moss</b></span><span class="tagchip tag-access">Access</span></div>
+  <p class="td-angle">Congratulations, no pitch</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M19 8v6M16 11h6"/></svg><span><b>LinkedIn connect</b></span></div><p>K.C., congrats on the new role at Arhaus. I work with Shopify brands on AI shopping and support, and would like to follow your work.</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>A familiar name makes the next day&#x27;s email more likely to be opened. New executives accept connections readily in their first weeks.</p></div><div><span class="lbl">What it tests</span><p>Name recognition before email</p></div></div>
+</div><div class="touch-detail" id="touch-1" hidden>
+  <div class="td-head"><span class="td-day">Day 2</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email 1 → <b>Moss</b></span><span class="tagchip tag-p2">Pillar 2</span></div>
+  <p class="td-angle">Design-assisted orders are worth 4×</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Subject: <b>Arhaus&#x27;s 4x orders</b></span></div><p>Hi K.C.,</p><p>Congrats on stepping in as Arhaus&#x27;s first Chief Digital Officer.</p><p>One number from your 10-K stood out: design-assisted orders average more than four times a standard order. That makes the moment an online shopper decides to talk to a designer one of the most valuable moments on arhaus.com.</p><p>I&#x27;m curious how that handoff works online today. When someone browsing a sectional can&#x27;t decide which fabric suits a family with two dogs, what happens next?</p><p>I&#x27;m at Chatbase. We help Shopify brands answer those questions in the moment and route serious projects to people. Mostly curious how you&#x27;re thinking about it in your first months.</p><p>Gabe</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>It opens with their own most valuable metric, and ends with a question rather than a meeting request. The goal is to learn whether the handoff is a recognized problem.</p></div><div><span class="lbl">What it tests</span><p>Is the online-to-designer handoff a known problem? (problem recognition)</p></div></div>
+</div><div class="touch-detail" id="touch-2" hidden>
+  <div class="td-head"><span class="td-day">Day 4</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Call and voicemail → <b>Moss</b></span><span class="tagchip tag-access">Access</span></div>
+  <p class="td-angle">Follow-up on email 1</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><b>Call</b></span></div><p>&quot;Hi K.C., Gabe from Chatbase. I&#x27;ll be quick; is now a bad time?</p><p>I sent a note about design-assisted orders being worth four times a standard order. My question is simple: when an online shopper is close to a project but stuck on a choice, how do they reach a designer today?&quot;</p><p>Listen and dig: How many design appointments start online? Which questions come up again and again? Who owns that journey now?</p><p>Ask: &quot;Worth 20 minutes next week to compare notes on how other premium furniture brands handle it?&quot;</p></div><div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><b>Voicemail</b></span></div><p>&quot;Hi K.C., Gabe from Chatbase. I sent a short note about your design-assisted orders, the ones worth four times a standard order, and how online shoppers get to a designer. I&#x27;ll follow up by email; the subject is &#x27;Arhaus&#x27;s 4x orders.&#x27; Thanks.&quot;</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>New executives are buried in email, and a call two days later tests reachability. The voicemail points back to the email instead of making a new pitch.</p></div><div><span class="lbl">What it tests</span><p>Reachability; a live discovery question</p></div></div>
+</div><div class="touch-detail" id="touch-3" hidden>
+  <div class="td-head"><span class="td-day">Day 7</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email 2 → <b>Moss</b></span><span class="tagchip tag-p2">Pillar 2</span></div>
+  <p class="td-angle">Fall catalog going to 2× the households</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Subject: <b>Twice the catalog households this fall</b></span></div><p>K.C.,</p><p>John mentioned on the Q2 call that the anniversary catalog is going to more than twice as many households as spring, including people who&#x27;ve never bought from Arhaus.</p><p>First-time buyers ask different questions: dimensions, fabric durability, delivery, whether a designer is available. If those arrive on the site at 10 pm, they&#x27;re either answered right away or they wait.</p><p>Is answering pre-purchase questions at that volume on your radar this season, or already handled?</p><p>Gabe</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>A new angle tied to a live timing trigger. It&#x27;s still a question, so it tests urgency rather than pushing.</p></div><div><span class="lbl">What it tests</span><p>Is it a priority this season? (timing)</p></div></div>
+</div><div class="touch-detail" id="touch-4" hidden>
+  <div class="td-head"><span class="td-day">Day 9</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email → <b>Veltri</b></span><span class="tagchip tag-p1">Pillar 1</span></div>
+  <p class="td-angle">Designers&#x27; time is the scarce resource</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Subject: <b>Your 142 designers&#x27; time</b></span></div><p>Hi Kathy,</p><p>Arhaus ended 2025 with 142 interior designers across 97 showrooms, and design-assisted orders are worth more than four times a standard order. That makes designer time one of your most valuable resources.</p><p>My hunch is that a good share of what reaches designers and associates is routine (dimensions, fabric care, lead times), while the projects worth their time arrive without context.</p><p>Chatbase answers routine questions from your own catalog and policies, and hands qualified projects to designers with the details already captured. I&#x27;ve also reached out to K.C. Moss on the digital side, since this sits across both teams.</p><p>Would a short conversation about how designers spend their week be useful?</p><p>Gabe</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>It opens a second thread with a different pain point, the same product and an honest hypothesis. Mentioning Moss is transparent and shows I see the buying committee. That cross-team need is exactly why this deal needs an AE.</p></div><div><span class="lbl">What it tests</span><p>Is there a second champion with a different pain?</p></div></div>
+</div><div class="touch-detail" id="touch-5" hidden>
+  <div class="td-head"><span class="td-day">Day 11</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg> LinkedIn message → <b>Moss</b></span><span class="tagchip tag-ae">AE gate</span></div>
+  <p class="td-angle">Trade program adding thousands of members a month</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg><span><b>LinkedIn message</b></span></div><p>K.C., one more angle and then I&#x27;ll give your inbox a rest. John said on the Q2 call that the trade program is adding thousands of members a month. Trade buyers ask very different questions from consumers: commission or discount, quotes, project lead times. Does the same team handle both today?</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>A lighter channel mid-sequence. It tests my AE-gate reason directly: separate trade and consumer journeys need separate handling and governance.</p></div><div><span class="lbl">What it tests</span><p>Are trade and consumer handled separately? (AE gate)</p></div></div>
+</div><div class="touch-detail" id="touch-6" hidden>
+  <div class="td-head"><span class="td-day">Day 14</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email 3 → <b>Moss</b></span><span class="tagchip tag-ae">AE gate</span></div>
+  <p class="td-angle">A pilot that avoids the ERP project</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Subject: <b>A pilot that doesn&#x27;t touch your ERP project</b></span></div><p>K.C.,</p><p>I know your team is in the middle of a big systems program, with point-of-sale this quarter and ERP and order management in February. The last thing you need is another integration.</p><p>So here&#x27;s a narrow idea: a 30-day pilot on one journey, say pre-purchase questions on sofas and sectionals, answered only from your Shopify catalog and published policies, with every serious project handed to a designer. No ERP or order-management work. We&#x27;d agree on success measures up front, such as designer appointments booked and questions resolved without a person.</p><p>If it works, the integration conversation can wait until after February. Worth a 20-minute look?</p><p>Gabe</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>By now I&#x27;ve raised three angles. This touch shows I understand their constraints, lowers the risk of saying yes, and defines success up front. It&#x27;s the strongest case for an AE: scoping a deal that self-serve couldn&#x27;t.</p></div><div><span class="lbl">What it tests</span><p>Can a low-risk, scoped start earn a meeting? (AE gate: implementation)</p></div></div>
+</div><div class="touch-detail" id="touch-7" hidden>
+  <div class="td-head"><span class="td-day">Day 15</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Call and voicemail → <b>Moss</b></span><span class="tagchip tag-access">Access</span></div>
+  <p class="td-angle">Follow-up on the pilot idea</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><b>Call</b></span></div><p>&quot;Hi K.C., Gabe from Chatbase. Following up on yesterday&#x27;s note about a pilot that stays clear of your ERP project. One question: is guiding online shoppers to designers something you&#x27;d want to improve this season, or is it further down the list?&quot;</p><p>Ask: &quot;If it&#x27;s on the list, can we take 20 minutes to scope it?&quot;</p></div><div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><b>Voicemail</b></span></div><p>&quot;Hi K.C., Gabe from Chatbase. I sent an idea for a 30-day pilot that doesn&#x27;t touch your ERP or order-management work. The subject line is about your ERP project. Happy to walk through it in 20 minutes.&quot;</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>The last live attempt, tied to the most concrete offer.</p></div><div><span class="lbl">What it tests</span><p>Last live attempt</p></div></div>
+</div><div class="touch-detail" id="touch-8" hidden>
+  <div class="td-head"><span class="td-day">Day 18</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email → <b>Bauer</b></span><span class="tagchip tag-ref">Referral</span></div>
+  <p class="td-angle">Who owns first-time-buyer questions?</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Subject: <b>Quick question about the fall catalog</b></span></div><p>Hi Steve,</p><p>With the anniversary catalog reaching twice as many households this fall, I&#x27;d guess plenty of first-time buyers land on the site with questions before they ever visit a showroom.</p><p>I&#x27;ve been trying to reach K.C. Moss about how those questions get answered and routed to designers. Is that his area, or is someone on your team closer to it?</p><p>Gabe</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>A referral path if Moss is silent. Marketing owns the demand the catalog creates, and a small ask is easy to answer.</p></div><div><span class="lbl">What it tests</span><p>Referral path if Moss is silent</p></div></div>
+</div><div class="touch-detail" id="touch-9" hidden>
+  <div class="td-head"><span class="td-day">Day 21</span><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Breakup email → <b>Moss</b></span><span class="tagchip tag-p2">Pillar 2</span></div>
+  <p class="td-angle">Close the loop until after February</p>
+  <div class="msg"><div class="msg-head"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Subject: <b>Closing the loop</b></span></div><p>K.C.,</p><p>I haven&#x27;t heard back, so I&#x27;ll assume the timing isn&#x27;t right, which makes sense with point-of-sale and ERP both landing in the next few months.</p><p>I&#x27;ll check back after your February go-live. If guiding online shoppers to designers becomes a priority before then, I&#x27;m one reply away.</p><p>Gabe</p></div>
+  <div class="td-notes"><div><span class="lbl">Why here</span><p>It ends respectfully, names a real future trigger instead of an arbitrary follow-up, and often prompts a reply.</p></div><div><span class="lbl">What it tests</span><p>Final test; sets a credible future trigger</p></div></div>
+</div></div>
+</div>
+
+</section>
+
+<section class="task" id="task3" style="--task:#d9a066">
+<h2 class="section-head"><span class="kicker">Task 3</span>First Call: K.C. Moss, Arhaus</h2>
+<p class="lede">The first call after the Task 2 sequence.</p>
+
+<div class="tblock" id="t3-plan">
+  <div class="duo">
+    <div class="callout"><span class="lbl">Strategy</span><b>A diagnosis, not a demo.</b><p>Arhaus has never said publicly that this is a problem. I need to find out if it is before pitching anything.</p></div>
+    <div class="callout"><span class="lbl">Goal</span><b>One agreed next step.</b><p>A scoping session with his team and the design or retail side, or a clear "not a fit." A clear no is better than a vague maybe. It protects both our time.</p></div>
+  </div>
+  <h3>Call structure</h3>
+  <div class="agenda"><div class="seg" style="flex:2"><b>2 min</b><span>Agenda</span></div><div class="seg big" style="flex:12"><b>12 min</b><span>Discovery</span></div><div class="seg" style="flex:5"><b>5 min</b><span>How a pilot would work</span></div><div class="seg" style="flex:5"><b>5 min</b><span>Next steps</span></div></div>
+  <p class="muted small-note">Most of the time goes to listening. The pilot comes only after I understand the problem.</p>
+</div>
+
+<div class="tblock" id="t3-discovery">
+  <h3>Discovery, one pillar at a time</h3>
+  <div class="dcols"><div class="dcol"><span class="eyebrow">Pillar 1</span><h4>The problem</h4>
+      <div class="ask"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><p>When an online shopper is stuck between options, what happens today?</p></div><div class="ask"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><p>How many design appointments start online?</p></div><div class="ask"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><p>What questions reach your designers over and over?</p></div>
+      <p class="tests">Tests my Pillar 1 hypothesis: buyers need guidance, and the handoff to designers is where value is won or lost.</p></div><div class="dcol"><span class="eyebrow">Pillar 2</span><h4>The deal</h4>
+      <div class="ask"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><p>What&#x27;s on your agenda for your first 90 days?</p></div><div class="ask"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><p>What handles customer questions today?</p></div><div class="ask"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><p>Who else would weigh in, and how do you usually buy software?</p></div>
+      <p class="tests">Tests Pillar 2: priority, what we&#x27;d be competing with, and who decides.</p></div><div class="dcol"><span class="eyebrow">Pillar 3</span><h4>Why an AE</h4>
+      <div class="ask"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><p>Do consumer, trade and contract buyers get the same experience online?</p></div><div class="ask"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><p>How much room does your team have before the ERP go-live?</p></div>
+      <p class="tests">Tests the Pillar 3 gate: separate journeys and tight bandwidth are why this needs a scoped deal, not self-serve.</p></div></div>
+</div>
+
+<div class="tblock" id="t3-qual">
+  <div class="duo">
+    <div><h3>Qualification</h3>
+      <p class="muted">I use my three pillars instead of a generic checklist. It keeps qualification consistent with how I chose the account.</p>
+      <div class="quals"><div class="q"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span class="eyebrow">Pillar 1</span><b>Is there real value?</b></div></div><div class="q"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span class="eyebrow">Pillar 2</span><b>Can we win it?</b></div></div><div class="q"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span class="eyebrow">Pillar 3</span><b>Does it need an AE?</b></div></div></div>
+      <div class="flags"><span class="lbl">Red flags</span><span class="flagchip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>No owner</span><span class="flagchip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>The problem isn&#x27;t felt</span><span class="flagchip"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6m0-6-6 6"/></svg>Nothing can move until after February</span></div>
+    </div>
+    <div><h3>Creating urgency</h3>
+      <p class="muted">Tied to their calendar, not mine. No invented deadlines or discounts.</p>
+      <div class="steps"><div class="step"><span class="dot"></span><b>Now</b><span>Fall catalog reaching twice as many households</span></div><div class="step"><span class="dot"></span><b>First 90 days</b><span>K.C. is setting his agenda</span></div><div class="step pilot"><span class="dot"></span><b>30-day pilot</b><span>Results in hand</span></div><div class="step wall"><span class="dot"></span><b>Feb 2027</b><span>ERP and order-management go-live</span></div></div>
+      <p class="muted small-note">A 30-day pilot shows results before the February go-live.</p>
+    </div>
+  </div>
+</div>
+
+<div class="tblock" id="t3-objections">
+  <h3>Objections</h3>
+  <p class="muted">Click an objection to see my response.</p>
+  <div class="objs"><details class="obj"><summary><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg><span>&quot;We&#x27;re mid-ERP and point-of-sale, no bandwidth.&quot;</span></summary><div class="obj-body"><span class="lbl">My response</span><p>The pilot needs no ERP or order-management work: it uses only the Shopify catalog and published policies.</p><span class="lbl">Why</span><p>I raised this constraint in the sequence myself, so the answer is ready.</p></div></details><details class="obj"><summary><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg><span>&quot;AI could cheapen our designer-led experience.&quot;</span></summary><div class="obj-body"><span class="lbl">My response</span><p>The assistant doesn&#x27;t replace designers. It answers simple questions and sends serious projects to them with context. Arhaus reviews answers before launch.</p><span class="lbl">Why</span><p>Design-assisted orders are worth 4× a standard order, so protecting that experience is the point, not a concession.</p></div></details><details class="obj"><summary><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg><span>&quot;It might get custom options wrong.&quot;</span></summary><div class="obj-body"><span class="lbl">My response</span><p>Limit it to published information and hand everything else to a person. Agree on which questions it may answer.</p><span class="lbl">Why</span><p>Accuracy is a real risk with 800 fabrics. Admitting it builds trust.</p></div></details><details class="obj"><summary><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg><span>&quot;I&#x27;m new and still setting priorities.&quot;</span></summary><div class="obj-body"><span class="lbl">My response</span><p>Offer to be useful input to his plan, and position a small pilot as an early, low-risk win.</p><span class="lbl">Why</span><p>A new executive wants quick wins, not big bets.</p></div></details><details class="obj"><summary><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg><span>&quot;We could use another tool or build it.&quot;</span></summary><div class="obj-body"><span class="lbl">My response</span><p>Fair. Compare on time to value and the quality of the designer handoff, with a side-by-side test on their real questions.</p><span class="lbl">Why</span><p>I&#x27;d rather win a fair test than argue features.</p></div></details></div>
+  <h3>Risks</h3>
+  <div class="risks"><div class="risk"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/></svg><div><b>Risk: K.C. may not own customer care.</b><p>Ask early who does, and bring in Kathy Veltri&#x27;s team.</p><small>Multi-threading was built into the sequence for this reason.</small></div></div><div class="risk"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/></svg><div><b>Risk: Value is hard to prove.</b><p>Agree on success measures before starting: designer appointments booked, questions resolved without a person, conversion on guided sessions.</p><small>Chatbase&#x27;s own case studies show revenue impact is often a projection, so I want measurable proof.</small></div></div></div>
+</div>
+</section>
 </main>
 <footer>Sources: Chatbase customer stories, documentation and pricing; Gorgias documentation; Shopify case studies for each account; Arhaus FY2025 10-K and Q2 2026 earnings materials; live storefront checks (October 2026). Chat examples are illustrative, not real interactions.</footer>
 <script>
@@ -1477,6 +1788,21 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   });
   document.addEventListener('click',function(e){ menus.forEach(function(m){ if(!m.contains(e.target)) set(m,false); }); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeAll(); });
+})();
+</script>
+<script>
+(function(){
+  var dots=[].slice.call(document.querySelectorAll('.touch'));
+  function show(i){
+    dots.forEach(function(d){ d.classList.toggle('active', d.dataset.i==i); d.setAttribute('aria-expanded', d.dataset.i==i); });
+    document.querySelectorAll('.touch-detail').forEach(function(p){ p.hidden = p.id!=='touch-'+i; });
+  }
+  dots.forEach(function(d){ d.addEventListener('click', function(){
+    show(d.dataset.i);
+    if (window.matchMedia('(max-width:780px)').matches) document.getElementById('touch-'+d.dataset.i).scrollIntoView({behavior:'smooth', block:'nearest'});
+  }); });
+  if (dots.length) show(0);
+  window.addEventListener('beforeprint', function(){ document.querySelectorAll('details').forEach(function(x){ x.open=true; }); });
 })();
 </script>
 </body>
