@@ -117,6 +117,52 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   .logic, .takeaway, .chat { background:#f5f5f5; }
   .account { break-before:page; }
 }
+/* two-column brief pages */
+.account { width:min(1440px, calc(100vw - 48px)); margin-left:calc(50% - min(720px, 50vw - 24px)); background:#161616; border:1px solid #2c2c2c; border-radius:16px; padding:34px 38px 40px; margin-top:48px; }
+.account:first-of-type { margin-top:24px; }
+.cols { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:44px; margin-top:8px; }
+.col > h2:first-child, .col > section:first-child > h2:first-child { margin-top:28px; }
+.col-right { border-left:1px solid #2a2a2a; padding-left:44px; }
+.col .detail th { width:30%; }
+.col .angle { margin:24px 0 36px; }
+.col-right .table-scroll { overflow:visible; }
+.col-right table.commercial, .col-right table.ae { table-layout:auto; min-width:0; }
+.col-right table, .col-right tbody, .col-right tr, .col-right td { display:block; width:100%; }
+.col-right tr:first-child { display:none; }
+.col-right tr { background:var(--card); border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+.col-right td { border:0; padding:5px 0; font-size:14px; }
+.col-right td.criterion { font-size:15px; padding-bottom:8px; margin-bottom:4px; border-bottom:1px solid #262626; }
+.col-right td[data-label]::before { content:attr(data-label); display:block; font-size:11px; letter-spacing:.8px; text-transform:uppercase; color:#888; margin-bottom:2px; }
+.col-right .section { margin-top:0; }
+.col-right .section + .section { margin-top:34px; }
+@media (max-width:1100px) {
+  .cols { grid-template-columns:1fr; gap:0; }
+  .col-right { border-left:0; padding-left:0; }
+}
+@media (max-width:780px) {
+  .account { width:auto; margin-left:0; padding:22px 16px 26px; border-radius:12px; }
+  .col .detail th { width:34%; }
+}
+@media print { .account { width:auto; margin-left:0; background:none; border:0; padding:0; } .cols { grid-template-columns:1fr 1fr; } }
+/* brief panels: lift off the background, tint each one slightly */
+.account { background:#1f1f1f; border:1px solid #333; border-top:3px solid var(--accent); box-shadow:0 10px 30px rgba(0,0,0,.35); margin-top:72px;
+  background-image:linear-gradient(to bottom, color-mix(in srgb, var(--accent) 7%, transparent), transparent 260px); }
+.account .account-title .number { color:var(--accent); font-weight:600; }
+.account .pill { border-color:#4a4a4a; }
+.account .angle.lead .pill { border-color:var(--accent); color:#fff; }
+.account .logic { background:#181818; border-left-color:var(--accent); }
+.account .evidence, .col-right tr, .account .outreach { background:#191919; border:1px solid #2a2a2a; }
+.account .chat { background:#171717; border:1px solid #2a2a2a; }
+.col-right { border-left-color:#333; }
+@media print { .account { box-shadow:none; background-image:none; border-top:0; } }
+/* section and theme separation */
+.section-head { border-top:0; padding-top:0; margin-top:96px; }
+.section-head::before { content:""; display:block; height:1px; margin-bottom:34px; background:linear-gradient(to right, #6a6a6a, #333 60%, transparent); }
+.kicker { display:block; font-size:12px; font-weight:500; letter-spacing:1.4px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.theme { background:#1c1c1c; border:1px solid #2b2b2b; border-radius:14px; padding:4px 28px 22px; margin:30px 0; }
+.theme > h3:first-child { margin-top:22px; padding-bottom:12px; border-bottom:1px solid #2b2b2b; }
+@media (max-width:780px) { .theme { padding:2px 16px 16px; } }
+@media print { .theme { background:none; border:0; padding:0; } }
 </style>
 </head>
 <body id="top">
@@ -149,7 +195,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
 <p class="muted">This site covers how I defined the ICP and chose my 10 accounts, plus a brief for each account. My outreach sequence and first-call plan (Tasks 2 and 3) are in the presentation.</p>
 
 <!-- ============ SECTION 1 ============ -->
-<h2 id="approach" class="section-head">My Approach</h2>
+<h2 id="approach" class="section-head"><span class="kicker">Section 1</span>My Approach</h2>
 
 <div class="toc">
   <b>Four parts:</b>
@@ -162,6 +208,7 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
 </div>
 
 <!-- Theme 1 -->
+<section class="theme">
 <h3 id="t1">1. Understanding the problem</h3>
 <div class="takeaway"><b>Takeaway:</b> Chatbase's own customers showed me what the product solves, but not who needs an AE.</div>
 
@@ -179,8 +226,9 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
 <p>These three groups became my first pillar: <b>does this merchant have a problem Chatbase can solve that's worth real money?</b></p>
 
 <p>But all three merchants set Chatbase up on their own. So these stories told me what Chatbase can do, not which merchants need a salesperson. That became the question for the rest of my work.</p>
+</section>
 
-<!-- Theme 2 -->
+<section class="theme">
 <h3 id="t2">2. Defining who to target</h3>
 <div class="takeaway"><b>Takeaway:</b> A merchant is worth an AE's time only if Chatbase can help, the deal is winnable, and self-serve isn't enough.</div>
 
@@ -238,8 +286,9 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <tr><td>Live chat or email only</td><td>New adoption</td><td>No tool to displace. These often self-serve, so they only get an AE if they pass Pillar 3.</td></tr>
   <tr><td>Standalone AI agent already deployed</td><td>Switch only with evidence</td><td>Needs proof the current tool underperforms; otherwise I move on.</td></tr>
 </table></div>
+</section>
 
-<!-- Theme 3 -->
+<section class="theme">
 <h3 id="t3">3. Making it measurable</h3>
 <div class="takeaway"><b>Takeaway:</b> I turned the three pillars into criteria I could check from the outside and score the same way for every merchant.</div>
 
@@ -310,8 +359,9 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <li><b>Pillar 3 is a gate:</b> an account only qualifies if at least one AE criterion scores 3 or higher.</li>
   <li><b>Ties go to the account I can actually reach:</b> a named sponsor, a workable time zone, a shared language.</li>
 </ul>
+</section>
 
-<!-- Theme 4 -->
+<section class="theme">
 <h3 id="t4">4. From framework to 10 accounts</h3>
 <div class="takeaway"><b>Takeaway:</b> I narrowed the list one pillar at a time, scored what was left honestly, and checked every live site before finalizing.</div>
 
@@ -349,13 +399,16 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <tr><td>PowerNode</td><td>Building my mind map of the ICP criteria by hand</td></tr>
 </table></div>
 <p><b>With more budget:</b> Store Leads or BuiltWith Pro (filter every Shopify Plus store by apps and storefronts), LinkedIn Sales Navigator (current titles and job changes), Apollo or ZoomInfo (verified contacts), Clay (run my scoring across thousands of stores), and Similarweb (traffic by market). Most valuable, once in the role: Chatbase's own data on which customers grow into larger accounts, to recalibrate my weights.</p>
+</section>
+
+
 
 </div>
-<h2 id="briefs" class="section-head">Account Briefs</h2>
+<h2 id="briefs" class="section-head"><span class="kicker">Section 2</span>Account Briefs</h2>
 <p class="muted">Each brief follows the three pillars. Pillar 1 angles are ordered by rubric score; Pillars 2 and 3 show only what scored 2 or higher. Names and titles come from public sources and would be confirmed before outreach.</p>
 <nav class="nav"><a href="#arhaus">01 · ARHAUS</a><a href="#bauer">02 · BAUER HOCKEY</a><a href="#ruggable">03 · RUGGABLE</a><a href="#turtle-beach">04 · TURTLE BEACH</a><a href="#escalade">05 · ESCALADE SPORTS</a><a href="#capezio">06 · CAPEZIO</a><a href="#nanoleaf">07 · NANOLEAF</a><a href="#mustang">08 · MUSTANG SURVIVAL</a><a href="#planeta-huerto">09 · PLANETA HUERTO</a><a href="#footdistrict">10 · FOOTDISTRICT</a></nav>
 
-<article class="account" id="arhaus">
+<article class="account" id="arhaus" style="--accent:#7fa6d9">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">01</span><h1>Arhaus</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Premium furniture · US</p>
@@ -366,6 +419,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with design-led buying guidance online. Treat designer and showroom support as the second angle.</p>
   <div class="logic"><b>Rubric → strategy.</b> R1 = 4 and R3 = 4 make guided buying the lead. O1 = 3 and O3 = 3 support a second angle around designers and showrooms. Support criteria score 1 (no evidence yet), so support savings stay a discovery question. Strongest AE reason: A2 = 4, three separate buyer journeys.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -414,24 +469,25 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> What are the top reasons customers contact care?</li><li><b>Value:</b> What volume and handling time do they represent?</li><li><b>Feasibility:</b> When will order data be available after the ERP go-live?</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C2, C4, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg>C2 · Priority &amp; Timing</span> <span class="score" title="Score 4 of 5">4/5</span></td>
-        <td>Named its first Chief Digital Officer in Sept 2026. A $20M systems program runs through 2026, with point-of-sale this quarter and ERP in February 2027.</td>
-        <td><b>New digital leadership and funded change.</b><small>Caveat: AI is not named as a priority yet.</small></td>
-        <td>New digital leader; funded transformation<small><a href="https://www.globenewswire.com/news-release/2026/09/30/3372367/0/en/arhaus-announces-k-c-moss-as-chief-digital-officer.html" target="_blank" rel="noopener">Press release · Q2 deck</a></small></td></tr>
+        <td data-label="Evidence">Named its first Chief Digital Officer in Sept 2026. A $20M systems program runs through 2026, with point-of-sale this quarter and ERP in February 2027.</td>
+        <td data-label="What it means"><b>New digital leadership and funded change.</b><small>Caveat: AI is not named as a priority yet.</small></td>
+        <td data-label="Signal · source">New digital leader; funded transformation<small><a href="https://www.globenewswire.com/news-release/2026/09/30/3372367/0/en/arhaus-announces-k-c-moss-as-chief-digital-officer.html" target="_blank" rel="noopener">Press release · Q2 deck</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h12v4M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M20 12h-6v5h6m-3-2.5h.1"/></svg>C4 · Purchasing Readiness</span> <span class="score" title="Score 4 of 5">4/5</span></td>
-        <td>Public company with $1.38B revenue in FY2025 and ongoing technology investment.</td>
-        <td><b>Clear capacity to buy.</b><small>Caveat: AI budget not confirmed.</small></td>
-        <td>Financial capacity; recent tech investment<small><a href="https://www.sec.gov/Archives/edgar/data/1875444/000187544426000010/arhs-20251231.htm" target="_blank" rel="noopener">FY2025 10-K</a></small></td></tr>
+        <td data-label="Evidence">Public company with $1.38B revenue in FY2025 and ongoing technology investment.</td>
+        <td data-label="What it means"><b>Clear capacity to buy.</b><small>Caveat: AI budget not confirmed.</small></td>
+        <td data-label="Signal · source">Financial capacity; recent tech investment<small><a href="https://www.sec.gov/Archives/edgar/data/1875444/000187544426000010/arhs-20251231.htm" target="_blank" rel="noopener">FY2025 10-K</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Moved from a custom platform to Shopify Plus; feature builds now take about 3 months instead of 12–18.</td>
-        <td><b>A team that has rolled out platform changes before.</b><small>Caveat: Bandwidth is tight until February.</small></td>
-        <td>Proven Shopify implementation<small><a href="https://www.shopify.com/case-studies/arhaus" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Moved from a custom platform to Shopify Plus; feature builds now take about 3 months instead of 12–18.</td>
+        <td data-label="What it means"><b>A team that has rolled out platform changes before.</b><small>Caveat: Bandwidth is tight until February.</small></td>
+        <td data-label="Signal · source">Proven Shopify implementation<small><a href="https://www.shopify.com/case-studies/arhaus" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Lead with K.C. Moss using the 4× design-assisted figure. Open a second thread with Kathy Veltri on designer time. Offer a pilot that stays clear of the ERP rollout. The full sequence is in my presentation.</p></div></div>
   </section>
@@ -442,30 +498,32 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/></svg>A1 · Sales-assisted conversion</span> <span class="score" title="Score 2 of 5">2/5</span><small>Help the deal through stakeholders, security review and procurement.</small></td>
-        <td>Public company; buyers span digital, retail and IT.</td>
-        <td>Align digital, retail and IT around one pilot and its success measures.</td>
-        <td>Bring the CIO in once there&#x27;s interest, to start security review early.</td>
-        <td>Who signs off? · What does security review involve? · How long does procurement take?</td></tr>
+        <td data-label="Account signal">Public company; buyers span digital, retail and IT.</td>
+        <td data-label="What the AE does">Align digital, retail and IT around one pilot and its success measures.</td>
+        <td data-label="Example">Bring the CIO in once there&#x27;s interest, to start security review early.</td>
+        <td data-label="To qualify">Who signs off? · What does security review involve? · How long does procurement take?</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 4 of 5">4/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>Three buyer journeys (consumer, trade, contract), a trade program adding thousands of members a month, and showroom staff needing far more than 5 seats.<small><a href="https://www.marketbeat.com/earnings/reports/2026-8-6-arhaus-inc-stock/" target="_blank" rel="noopener">Q2 2026 call</a></small></td>
-        <td>Scope separate journeys, permissions and seats into one agreement.</td>
-        <td>Consumer pilot first, then separate agents for trade and showroom staff.</td>
-        <td>Seats needed · Journeys in scope · Expected usage</td></tr>
+        <td data-label="Account signal">Three buyer journeys (consumer, trade, contract), a trade program adding thousands of members a month, and showroom staff needing far more than 5 seats.<small><a href="https://www.marketbeat.com/earnings/reports/2026-8-6-arhaus-inc-stock/" target="_blank" rel="noopener">Q2 2026 call</a></small></td>
+        <td data-label="What the AE does">Scope separate journeys, permissions and seats into one agreement.</td>
+        <td data-label="Example">Consumer pilot first, then separate agents for trade and showroom staff.</td>
+        <td data-label="To qualify">Seats needed · Journeys in scope · Expected usage</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 3 of 5">3/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>Mid-way through ERP, order-management and point-of-sale changes; an internal 3D room planner.<small><a href="https://www.sec.gov/Archives/edgar/data/1875444/000187544426000028/arhaus2q2026investorpres.htm" target="_blank" rel="noopener">Q2 deck</a></small></td>
-        <td>Sequence the rollout around their systems program.</td>
-        <td>Catalog-and-policy pilot now; order data after the February 2027 go-live.</td>
-        <td>Data sources · Go-live dates · Integration owner</td></tr>
+        <td data-label="Account signal">Mid-way through ERP, order-management and point-of-sale changes; an internal 3D room planner.<small><a href="https://www.sec.gov/Archives/edgar/data/1875444/000187544426000028/arhaus2q2026investorpres.htm" target="_blank" rel="noopener">Q2 deck</a></small></td>
+        <td data-label="What the AE does">Sequence the rollout around their systems program.</td>
+        <td data-label="Example">Catalog-and-policy pilot now; order data after the February 2027 go-live.</td>
+        <td data-label="To qualify">Data sources · Go-live dates · Integration owner</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 3 of 5">3/5</span><small>Grow the account after first success.</small></td>
-        <td>10–14 showroom projects planned in 2026, plus trade and contract programs.<small><a href="https://www.sec.gov/Archives/edgar/data/1875444/000187544426000028/arhaus2q2026investorpres.htm" target="_blank" rel="noopener">Q2 deck</a></small></td>
-        <td>Plan expansion from the pilot into trade, contract and showroom use.</td>
-        <td>Add the trade program once the consumer pilot proves answer quality.</td>
-        <td>Pilot success measure · Next journey · Owner for each</td></tr>
+        <td data-label="Account signal">10–14 showroom projects planned in 2026, plus trade and contract programs.<small><a href="https://www.sec.gov/Archives/edgar/data/1875444/000187544426000028/arhaus2q2026investorpres.htm" target="_blank" rel="noopener">Q2 deck</a></small></td>
+        <td data-label="What the AE does">Plan expansion from the pilot into trade, contract and showroom use.</td>
+        <td data-label="Example">Add the trade program once the consumer pilot proves answer quality.</td>
+        <td data-label="To qualify">Pilot success measure · Next journey · Owner for each</td></tr>
     </table></div>
     
   </section>
+  </div>
+  </div>
 </article>
-<article class="account" id="bauer">
+<article class="account" id="bauer" style="--accent:#6fb3a8">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">02</span><h1>Bauer Hockey</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Hockey equipment · US / Canada</p>
@@ -476,6 +534,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with warranty and returns help. Test sizing guidance as a second angle.</p>
   <div class="logic"><b>Rubric → strategy.</b> S3 = 3 makes post-purchase help the lead. R1 and R2 score 2, so sizing guidance is a plausible second angle. Operational criteria score 1. Strongest AE reason: A3 = 4, integrations beyond Chatbase&#x27;s built-in actions.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -509,24 +569,25 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> What share of returns are due to fit?</li><li><b>Value:</b> What does a returned skate cost?</li><li><b>Feasibility:</b> Is sizing data consistent across product lines?</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C2, C4, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg>C2 · Priority &amp; Timing</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Moved from Salesforce Commerce Cloud to Shopify Plus, with an internationalization project planned.</td>
-        <td><b>Active digital change.</b><small>Caveat: No AI initiative confirmed.</small></td>
-        <td>Recent replatforming; planned expansion<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Moved from Salesforce Commerce Cloud to Shopify Plus, with an internationalization project planned.</td>
+        <td data-label="What it means"><b>Active digital change.</b><small>Caveat: No AI initiative confirmed.</small></td>
+        <td data-label="Signal · source">Recent replatforming; planned expansion<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h12v4M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M20 12h-6v5h6m-3-2.5h.1"/></svg>C4 · Purchasing Readiness</span> <span class="score" title="Score 4 of 5">4/5</span></td>
-        <td>Reported 60% revenue growth within six months of launch; runs SAP and several paid apps.</td>
-        <td><b>Capacity to invest.</b><small>Caveat: Figures are vendor-reported.</small></td>
-        <td>Recent tech investment<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Reported 60% revenue growth within six months of launch; runs SAP and several paid apps.</td>
+        <td data-label="What it means"><b>Capacity to invest.</b><small>Caveat: Figures are vendor-reported.</small></td>
+        <td data-label="Signal · source">Recent tech investment<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 4 of 5">4/5</span></td>
-        <td>A Chief Digital Officer, plus an agency (CQL) that provides ongoing support.</td>
-        <td><b>Experienced owner and partner.</b></td>
-        <td>Named owner; implementation partner<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">A Chief Digital Officer, plus an agency (CQL) that provides ongoing support.</td>
+        <td data-label="What it means"><b>Experienced owner and partner.</b></td>
+        <td data-label="Signal · source">Named owner; implementation partner<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Reach Chris Cocca with a warranty-and-returns example, or get a warm intro through CQL, which also works with Escalade Sports.</p></div></div>
   </section>
@@ -537,25 +598,27 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 2 of 5">2/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>Internationalization project planned.<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Size usage across markets once they launch.</td>
-        <td>Start in North America, add markets as they open.</td>
-        <td>Markets · Expected volume</td></tr>
+        <td data-label="Account signal">Internationalization project planned.<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Size usage across markets once they launch.</td>
+        <td data-label="Example">Start in North America, add markets as they open.</td>
+        <td data-label="To qualify">Markets · Expected volume</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 4 of 5">4/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>SAP, Loop Returns, Searchspring, Rebuy and a Yotpo loyalty build.<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Scope custom actions so answers use returns and warranty data correctly.</td>
-        <td>Connect warranty eligibility to order data through a custom action.</td>
-        <td>Available APIs · Integration owner (CQL?) · Accuracy requirements</td></tr>
+        <td data-label="Account signal">SAP, Loop Returns, Searchspring, Rebuy and a Yotpo loyalty build.<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Scope custom actions so answers use returns and warranty data correctly.</td>
+        <td data-label="Example">Connect warranty eligibility to order data through a custom action.</td>
+        <td data-label="To qualify">Available APIs · Integration owner (CQL?) · Accuracy requirements</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 3 of 5">3/5</span><small>Grow the account after first success.</small></td>
-        <td>Internationalization and a loyalty program.<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Plan expansion into new markets and loyalty questions.</td>
-        <td>Add loyalty-points questions after the warranty pilot.</td>
-        <td>Pilot results · Next market</td></tr>
+        <td data-label="Account signal">Internationalization and a loyalty program.<small><a href="https://www.shopify.com/case-studies/bauer" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Plan expansion into new markets and loyalty questions.</td>
+        <td data-label="Example">Add loyalty-points questions after the warranty pilot.</td>
+        <td data-label="To qualify">Pilot results · Next market</td></tr>
     </table></div>
     <div class="logic small">A1 (sales-assisted conversion) is discovery only: no buying obstacle needing sales help has been found yet.</div>
   </section>
+  </div>
+  </div>
 </article>
-<article class="account" id="ruggable">
+<article class="account" id="ruggable" style="--accent:#c9a46c">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">03</span><h1>Ruggable</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Washable rugs and home · US (plus EU, AU)</p>
@@ -566,6 +629,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with buying guidance on size and material. Test care, shipping and returns questions as the second angle.</p>
   <div class="logic"><b>Rubric → strategy.</b> R1, R2, S1–S3, O2 and O3 all score 2: several plausible angles, none proven yet. I lead with buying guidance because it carries the most weight, and treat support as second. Strongest AE reason: A2 = 3 and A4 = 3, separate stores per region.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -599,24 +664,25 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> Top contact reasons by market</li><li><b>Value:</b> Volume and handling time</li><li><b>Feasibility:</b> Where policies live for each store</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C2, C4, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg>C2 · Priority &amp; Timing</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Launched Canada and the Nordics; New Zealand planned.</td>
-        <td><b>Expansion in motion.</b></td>
-        <td>Market expansion<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Launched Canada and the Nordics; New Zealand planned.</td>
+        <td data-label="What it means"><b>Expansion in motion.</b></td>
+        <td data-label="Signal · source">Market expansion<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h12v4M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M20 12h-6v5h6m-3-2.5h.1"/></svg>C4 · Purchasing Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Saved over $250K and almost 6,000 hours a year by consolidating stores.</td>
-        <td><b>Invests in operational efficiency.</b><small>Caveat: AI budget unknown.</small></td>
-        <td>Recent related investment<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Saved over $250K and almost 6,000 hours a year by consolidating stores.</td>
+        <td data-label="What it means"><b>Invests in operational efficiency.</b><small>Caveat: AI budget unknown.</small></td>
+        <td data-label="Signal · source">Recent related investment<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 4 of 5">4/5</span></td>
-        <td>Runs multi-entity Shopify Markets and localized storefronts.</td>
-        <td><b>Strong technical team.</b></td>
-        <td>Proven Shopify rollouts<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Runs multi-entity Shopify Markets and localized storefronts.</td>
+        <td data-label="What it means"><b>Strong technical team.</b></td>
+        <td data-label="Signal · source">Proven Shopify rollouts<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Message Dylan Feiner on LinkedIn about running agents across separate regional stores, and ask for an intro to the CX owner.</p></div></div>
   </section>
@@ -627,25 +693,27 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 3 of 5">3/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>Separate Shopify stores for the US, Europe and Australia.<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Scope one agent per store with agent-level permissions (Enterprise-only).</td>
-        <td>One agreement covering three regional agents.</td>
-        <td>Number of stores · Seats · Volume per market</td></tr>
+        <td data-label="Account signal">Separate Shopify stores for the US, Europe and Australia.<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Scope one agent per store with agent-level permissions (Enterprise-only).</td>
+        <td data-label="Example">One agreement covering three regional agents.</td>
+        <td data-label="To qualify">Number of stores · Seats · Volume per market</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 2 of 5">2/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>Third-party search and localized content per market.<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Coordinate content and language setup per market.</td>
-        <td>Launch in the US store first, then localize.</td>
-        <td>Content owners · Languages</td></tr>
+        <td data-label="Account signal">Third-party search and localized content per market.<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Coordinate content and language setup per market.</td>
+        <td data-label="Example">Launch in the US store first, then localize.</td>
+        <td data-label="To qualify">Content owners · Languages</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 3 of 5">3/5</span><small>Grow the account after first success.</small></td>
-        <td>New markets added over time.<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Add each new market to the agreement.</td>
-        <td>Add New Zealand when it launches.</td>
-        <td>Launch calendar · Market owners</td></tr>
+        <td data-label="Account signal">New markets added over time.<small><a href="https://www.shopify.com/case-studies/ruggable-2" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Add each new market to the agreement.</td>
+        <td data-label="Example">Add New Zealand when it launches.</td>
+        <td data-label="To qualify">Launch calendar · Market owners</td></tr>
     </table></div>
     <div class="logic small">A1 (sales-assisted conversion) is discovery only.</div>
   </section>
+  </div>
+  </div>
 </article>
-<article class="account" id="turtle-beach">
+<article class="account" id="turtle-beach" style="--accent:#b48fcf">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">04</span><h1>Turtle Beach</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Gaming headsets and accessories · US</p>
@@ -656,6 +724,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with compatibility guidance. Technical knowledge across regions is the second angle.</p>
   <div class="logic"><b>Rubric → strategy.</b> R1 = 3 and R2 = 3 make compatibility guidance the lead. O1 = 3 supports technical knowledge. S1 = 2 makes setup help a discovery angle. Strongest AE reason: A2 = 3 and A3 = 3, nine storefronts on a headless setup.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -704,24 +774,25 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> Top setup issues</li><li><b>Value:</b> Volume</li><li><b>Feasibility:</b> Support platform</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C3, C4, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg>C3 · Competitive Attractiveness</span> <span class="score" title="Score 2 of 5">2/5</span></td>
-        <td>No chat or AI assistant visible on the storefront.</td>
-        <td><b>An opening may exist.</b><small>Caveat: Support portal not yet checked.</small></td>
-        <td>No visible AI assistant<small>Live site check</small></td></tr>
+        <td data-label="Evidence">No chat or AI assistant visible on the storefront.</td>
+        <td data-label="What it means"><b>An opening may exist.</b><small>Caveat: Support portal not yet checked.</small></td>
+        <td data-label="Signal · source">No visible AI assistant<small>Live site check</small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h12v4M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M20 12h-6v5h6m-3-2.5h.1"/></svg>C4 · Purchasing Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Shopify with a headless storefront and several regional stores.</td>
-        <td><b>Established global ecommerce.</b><small>Caveat: Public company: expect formal procurement.</small></td>
-        <td>Paid commerce stack<small><a href="https://www.shopify.com/case-studies/turtle-beach" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Shopify with a headless storefront and several regional stores.</td>
+        <td data-label="What it means"><b>Established global ecommerce.</b><small>Caveat: Public company: expect formal procurement.</small></td>
+        <td data-label="Signal · source">Paid commerce stack<small><a href="https://www.shopify.com/case-studies/turtle-beach" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Ecommerce and web leads identified in my research.</td>
-        <td><b>Named owners.</b></td>
-        <td>Identified owners<small><a href="https://www.shopify.com/case-studies/turtle-beach" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Ecommerce and web leads identified in my research.</td>
+        <td data-label="What it means"><b>Named owners.</b></td>
+        <td data-label="Signal · source">Identified owners<small><a href="https://www.shopify.com/case-studies/turtle-beach" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Send Maria Santoro a short compatibility example (Xbox and PC) and ask how buyers get that answer today.</p></div></div>
   </section>
@@ -732,25 +803,27 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 3 of 5">3/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>Nine transactional storefronts.<small><a href="https://www.shopify.com/case-studies/turtle-beach" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Scope agents and governance per storefront.</td>
-        <td>One agreement for priority markets first.</td>
-        <td>Storefronts in scope · Traffic by market</td></tr>
+        <td data-label="Account signal">Nine transactional storefronts.<small><a href="https://www.shopify.com/case-studies/turtle-beach" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Scope agents and governance per storefront.</td>
+        <td data-label="Example">One agreement for priority markets first.</td>
+        <td data-label="To qualify">Storefronts in scope · Traffic by market</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 3 of 5">3/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>Headless storefront; model-specific specs.<small><a href="https://www.shopify.com/case-studies/turtle-beach" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Coordinate storefront integration and spec data.</td>
-        <td>Test compatibility questions across console generations before launch.</td>
-        <td>Spec sources · Storefront team</td></tr>
+        <td data-label="Account signal">Headless storefront; model-specific specs.<small><a href="https://www.shopify.com/case-studies/turtle-beach" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Coordinate storefront integration and spec data.</td>
+        <td data-label="Example">Test compatibility questions across console generations before launch.</td>
+        <td data-label="To qualify">Spec sources · Storefront team</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 2 of 5">2/5</span><small>Grow the account after first success.</small></td>
-        <td>More regions and troubleshooting use cases.</td>
-        <td>Expand to support use cases after the pilot.</td>
-        <td>Add setup help after compatibility guidance proves out.</td>
-        <td>Pilot results</td></tr>
+        <td data-label="Account signal">More regions and troubleshooting use cases.</td>
+        <td data-label="What the AE does">Expand to support use cases after the pilot.</td>
+        <td data-label="Example">Add setup help after compatibility guidance proves out.</td>
+        <td data-label="To qualify">Pilot results</td></tr>
     </table></div>
     <div class="logic small">A1 (sales-assisted conversion) is discovery only, though as a public company Turtle Beach likely has formal procurement.</div>
   </section>
+  </div>
+  </div>
 </article>
-<article class="account" id="escalade">
+<article class="account" id="escalade" style="--accent:#c98b8b">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">05</span><h1>Escalade Sports</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Sporting goods, 11 brands · US</p>
@@ -761,6 +834,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with product guidance on each brand. The multi-brand setup is the AE case.</p>
   <div class="logic"><b>Rubric → strategy.</b> R1, R2 and S1 score 2, and O3 = 3: guidance is plausible on each brand, and keeping 11 brands consistent is the clearest operational angle. Strongest AE reasons: A2 = 4 and A4 = 4, eleven brands.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -809,24 +884,25 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> Top contact reasons</li><li><b>Value:</b> Volume</li><li><b>Feasibility:</b> Manuals available</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C2, C4, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg>C2 · Priority &amp; Timing</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>11 brands moved to Shopify within a year; a new CEO joined in early 2025.</td>
-        <td><b>Recent change.</b><small>Caveat: No AI initiative confirmed.</small></td>
-        <td>Replatforming; new leadership<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">11 brands moved to Shopify within a year; a new CEO joined in early 2025.</td>
+        <td data-label="What it means"><b>Recent change.</b><small>Caveat: No AI initiative confirmed.</small></td>
+        <td data-label="Signal · source">Replatforming; new leadership<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h12v4M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M20 12h-6v5h6m-3-2.5h.1"/></svg>C4 · Purchasing Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Shopify Plus with custom integrations; reported 139% year-over-year sales growth.</td>
-        <td><b>Public company with recent tech investment.</b><small>Caveat: Vendor-reported figures.</small></td>
-        <td>Recent tech investment<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Shopify Plus with custom integrations; reported 139% year-over-year sales growth.</td>
+        <td data-label="What it means"><b>Public company with recent tech investment.</b><small>Caveat: Vendor-reported figures.</small></td>
+        <td data-label="Signal · source">Recent tech investment<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>CQL built and supports its Shopify sites.</td>
-        <td><b>Experienced partner.</b></td>
-        <td>Implementation partner<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">CQL built and supports its Shopify sites.</td>
+        <td data-label="What it means"><b>Experienced partner.</b></td>
+        <td data-label="Signal · source">Implementation partner<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Reach Nick Martin on LinkedIn with a Goalrilla example, or through CQL, which also works with Bauer.</p></div></div>
   </section>
@@ -837,30 +913,32 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/></svg>A1 · Sales-assisted conversion</span> <span class="score" title="Score 2 of 5">2/5</span><small>Help the deal through stakeholders, security review and procurement.</small></td>
-        <td>Public company with several brand owners.</td>
-        <td>Align brand owners on a shared pilot and success measures.</td>
-        <td>Pick one lead brand everyone agrees on.</td>
-        <td>Decision maker · Brand owners involved</td></tr>
+        <td data-label="Account signal">Public company with several brand owners.</td>
+        <td data-label="What the AE does">Align brand owners on a shared pilot and success measures.</td>
+        <td data-label="Example">Pick one lead brand everyone agrees on.</td>
+        <td data-label="To qualify">Decision maker · Brand owners involved</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 4 of 5">4/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>11 brands, each needing its own agent with agent-level permissions (Enterprise-only).<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Scope multiple agents and permissions into one agreement.</td>
-        <td>Three brands in phase one.</td>
-        <td>Brands in scope · Seats · Volume</td></tr>
+        <td data-label="Account signal">11 brands, each needing its own agent with agent-level permissions (Enterprise-only).<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Scope multiple agents and permissions into one agreement.</td>
+        <td data-label="Example">Three brands in phase one.</td>
+        <td data-label="To qualify">Brands in scope · Seats · Volume</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 2 of 5">2/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>Custom integrations across brand sites.<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Use one rollout template for every brand.</td>
-        <td>Reuse the first brand&#x27;s setup for the next ones.</td>
-        <td>Integration owner</td></tr>
+        <td data-label="Account signal">Custom integrations across brand sites.<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Use one rollout template for every brand.</td>
+        <td data-label="Example">Reuse the first brand&#x27;s setup for the next ones.</td>
+        <td data-label="To qualify">Integration owner</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 4 of 5">4/5</span><small>Grow the account after first success.</small></td>
-        <td>Eleven brands to expand into.<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>A brand-by-brand roadmap.</td>
-        <td>Add two brands per quarter after the pilot.</td>
-        <td>Pilot results · Brand priority</td></tr>
+        <td data-label="Account signal">Eleven brands to expand into.<small><a href="https://www.shopify.com/case-studies/escalade-sports" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">A brand-by-brand roadmap.</td>
+        <td data-label="Example">Add two brands per quarter after the pilot.</td>
+        <td data-label="To qualify">Pilot results · Brand priority</td></tr>
     </table></div>
     
   </section>
+  </div>
+  </div>
 </article>
-<article class="account" id="capezio">
+<article class="account" id="capezio" style="--accent:#7fa6d9">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">06</span><h1>Capezio</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Dance shoes and apparel · US (plus UK, EU)</p>
@@ -871,6 +949,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with fit and selection guidance. Specialist fitting knowledge is the second angle.</p>
   <div class="logic"><b>Rubric → strategy.</b> R1 = 3 and R2 = 3 make fit guidance the lead. O1 = 3 supports specialist knowledge. Post-purchase support scores 1, so it stays a discovery question. Strongest AE reason: A2 = 3 and A3 = 3, separate US, UK and EU operations.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -919,24 +999,25 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> Exchange volume</li><li><b>Value:</b> Handling time</li><li><b>Feasibility:</b> Regional policies</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C3, C4, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg>C3 · Competitive Attractiveness</span> <span class="score" title="Score 2 of 5">2/5</span></td>
-        <td>No chat or AI assistant visible on the storefront.</td>
-        <td><b>An opening may exist.</b><small>Caveat: CX platform unknown.</small></td>
-        <td>No visible AI assistant<small>Live site check</small></td></tr>
+        <td data-label="Evidence">No chat or AI assistant visible on the storefront.</td>
+        <td data-label="What it means"><b>An opening may exist.</b><small>Caveat: CX platform unknown.</small></td>
+        <td data-label="Signal · source">No visible AI assistant<small>Live site check</small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h12v4M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M20 12h-6v5h6m-3-2.5h.1"/></svg>C4 · Purchasing Readiness</span> <span class="score" title="Score 2 of 5">2/5</span></td>
-        <td>Shopify modernization with regional ERP and point-of-sale needs.</td>
-        <td><b>Ongoing investment.</b><small>Caveat: Budget owner unknown.</small></td>
-        <td>Recent tech investment<small><a href="https://www.shopify.com/case-studies/capezio" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Shopify modernization with regional ERP and point-of-sale needs.</td>
+        <td data-label="What it means"><b>Ongoing investment.</b><small>Caveat: Budget owner unknown.</small></td>
+        <td data-label="Signal · source">Recent tech investment<small><a href="https://www.shopify.com/case-studies/capezio" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 2 of 5">2/5</span></td>
-        <td>US, UK and EU operations with integrations.</td>
-        <td><b>Integrations already in place.</b><small>Caveat: Regional owners to confirm.</small></td>
-        <td>Integration experience<small><a href="https://www.shopify.com/case-studies/capezio" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">US, UK and EU operations with integrations.</td>
+        <td data-label="What it means"><b>Integrations already in place.</b><small>Caveat: Regional owners to confirm.</small></td>
+        <td data-label="Signal · source">Integration experience<small><a href="https://www.shopify.com/case-studies/capezio" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Send Magnus Gustafsson a pointe-shoe example showing a fitting handoff, and ask how regional care teams handle fit questions.</p></div></div>
   </section>
@@ -947,25 +1028,27 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 3 of 5">3/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>Separate US, UK and EU storefronts.<small><a href="https://www.shopify.com/case-studies/capezio" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Scope one agent per region with permissions.</td>
-        <td>US first, then UK and EU.</td>
-        <td>Regions · Volume</td></tr>
+        <td data-label="Account signal">Separate US, UK and EU storefronts.<small><a href="https://www.shopify.com/case-studies/capezio" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Scope one agent per region with permissions.</td>
+        <td data-label="Example">US first, then UK and EU.</td>
+        <td data-label="To qualify">Regions · Volume</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 3 of 5">3/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>Regional ERP, point-of-sale and inventory requirements.<small><a href="https://www.shopify.com/case-studies/capezio" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Plan data access region by region.</td>
-        <td>Start with catalog-only answers.</td>
-        <td>Data per region · Integration owner</td></tr>
+        <td data-label="Account signal">Regional ERP, point-of-sale and inventory requirements.<small><a href="https://www.shopify.com/case-studies/capezio" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Plan data access region by region.</td>
+        <td data-label="Example">Start with catalog-only answers.</td>
+        <td data-label="To qualify">Data per region · Integration owner</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 2 of 5">2/5</span><small>Grow the account after first success.</small></td>
-        <td>More regions to add.</td>
-        <td>Expand after the first region proves out.</td>
-        <td>Add the EU store next.</td>
-        <td>Pilot results</td></tr>
+        <td data-label="Account signal">More regions to add.</td>
+        <td data-label="What the AE does">Expand after the first region proves out.</td>
+        <td data-label="Example">Add the EU store next.</td>
+        <td data-label="To qualify">Pilot results</td></tr>
     </table></div>
     <div class="logic small">A1 (sales-assisted conversion) is discovery only.</div>
   </section>
+  </div>
+  </div>
 </article>
-<article class="account" id="nanoleaf">
+<article class="account" id="nanoleaf" style="--accent:#6fb3a8">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">07</span><h1>Nanoleaf</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Smart lighting · Canada (Toronto)</p>
@@ -976,6 +1059,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with compatibility before purchase. Setup and troubleshooting is the second angle. Toronto-based.</p>
   <div class="logic"><b>Rubric → strategy.</b> R1, R2, S1 and O1–O3 all score 2: plausible on several fronts, none proven. I lead with pre-purchase compatibility and treat setup support as second. Strongest AE reason: A2 = 3 and A3 = 3, multi-region selling on a headless storefront with an ERP.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -1009,24 +1094,25 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> Top setup issues</li><li><b>Value:</b> Volume by region</li><li><b>Feasibility:</b> Support platform</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C2, C4, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg>C2 · Priority &amp; Timing</span> <span class="score" title="Score 2 of 5">2/5</span></td>
-        <td>Rebuilt its storefront as headless and expanded into new regions.</td>
-        <td><b>Active digital investment.</b><small>Caveat: No AI initiative confirmed.</small></td>
-        <td>Replatforming; expansion<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Rebuilt its storefront as headless and expanded into new regions.</td>
+        <td data-label="What it means"><b>Active digital investment.</b><small>Caveat: No AI initiative confirmed.</small></td>
+        <td data-label="Signal · source">Replatforming; expansion<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h12v4M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M20 12h-6v5h6m-3-2.5h.1"/></svg>C4 · Purchasing Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Shopify Plus, Hydrogen and Microsoft Dynamics 365.</td>
-        <td><b>Invests in commerce tech.</b></td>
-        <td>Recent tech investment<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Shopify Plus, Hydrogen and Microsoft Dynamics 365.</td>
+        <td data-label="What it means"><b>Invests in commerce tech.</b></td>
+        <td data-label="Signal · source">Recent tech investment<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>A VP of Commerce Operations and an ERP partnership.</td>
-        <td><b>Named owner.</b></td>
-        <td>Identified owner<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">A VP of Commerce Operations and an ERP partnership.</td>
+        <td data-label="What it means"><b>Named owner.</b></td>
+        <td data-label="Signal · source">Identified owner<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Reach Paul Austin-Menear on LinkedIn and suggest meeting in person in Toronto.</p></div></div>
   </section>
@@ -1037,25 +1123,27 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 3 of 5">3/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>Selling in the US, Europe, Asia and Australia.<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Scope agents by region.</td>
-        <td>North America first, then Europe.</td>
-        <td>Regions · Volume</td></tr>
+        <td data-label="Account signal">Selling in the US, Europe, Asia and Australia.<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Scope agents by region.</td>
+        <td data-label="Example">North America first, then Europe.</td>
+        <td data-label="To qualify">Regions · Volume</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 3 of 5">3/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>Headless storefront and Dynamics 365 ERP.<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Plan the headless integration and data access.</td>
-        <td>Embed on the Hydrogen storefront with catalog data first.</td>
-        <td>Front-end owner · Data sources</td></tr>
+        <td data-label="Account signal">Headless storefront and Dynamics 365 ERP.<small><a href="https://www.shopify.com/case-studies/nanoleaf" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Plan the headless integration and data access.</td>
+        <td data-label="Example">Embed on the Hydrogen storefront with catalog data first.</td>
+        <td data-label="To qualify">Front-end owner · Data sources</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 2 of 5">2/5</span><small>Grow the account after first success.</small></td>
-        <td>Setup support as a second use case.</td>
-        <td>Add support after the pilot.</td>
-        <td>Add setup help in phase two.</td>
-        <td>Pilot results</td></tr>
+        <td data-label="Account signal">Setup support as a second use case.</td>
+        <td data-label="What the AE does">Add support after the pilot.</td>
+        <td data-label="Example">Add setup help in phase two.</td>
+        <td data-label="To qualify">Pilot results</td></tr>
     </table></div>
     <div class="logic small">A1 (sales-assisted conversion) is discovery only.</div>
   </section>
+  </div>
+  </div>
 </article>
-<article class="account" id="mustang">
+<article class="account" id="mustang" style="--accent:#c9a46c">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">08</span><h1>Mustang Survival</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Marine safety gear · Canada / US</p>
@@ -1066,6 +1154,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with safety-gear selection for recreational buyers. Serve professional buyers separately.</p>
   <div class="logic"><b>Rubric → strategy.</b> R1, R2, O1 and O3 score 2: selection guidance and specialist knowledge are plausible. Support scores 1. Strongest AE reasons: A2, A3 and A4 = 3, two country stores on an ERP with expansion planned.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -1114,24 +1204,25 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> Warranty volume</li><li><b>Value:</b> Handling time</li><li><b>Feasibility:</b> Policy by country</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C2, C4, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg>C2 · Priority &amp; Timing</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Moved from Salesforce Commerce Cloud to Shopify Plus; international and retail expansion planned.</td>
-        <td><b>Recent change and expansion plans.</b><small>Caveat: No AI initiative confirmed.</small></td>
-        <td>Replatforming; expansion<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Moved from Salesforce Commerce Cloud to Shopify Plus; international and retail expansion planned.</td>
+        <td data-label="What it means"><b>Recent change and expansion plans.</b><small>Caveat: No AI initiative confirmed.</small></td>
+        <td data-label="Signal · source">Replatforming; expansion<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h12v4M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M20 12h-6v5h6m-3-2.5h.1"/></svg>C4 · Purchasing Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Shopify Plus migration with ERP integration.</td>
-        <td><b>Recent investment.</b></td>
-        <td>Recent tech investment<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Shopify Plus migration with ERP integration.</td>
+        <td data-label="What it means"><b>Recent investment.</b></td>
+        <td data-label="Signal · source">Recent tech investment<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Migrated in 3 months with partner iamota.</td>
-        <td><b>Fast, proven rollout.</b></td>
-        <td>Proven implementation<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Migrated in 3 months with partner iamota.</td>
+        <td data-label="What it means"><b>Fast, proven rollout.</b></td>
+        <td data-label="Signal · source">Proven implementation<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Reach Joshua Horoshok on LinkedIn, or through iamota, its Shopify agency.</p></div></div>
   </section>
@@ -1142,30 +1233,32 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/></svg>A1 · Sales-assisted conversion</span> <span class="score" title="Score 2 of 5">2/5</span><small>Help the deal through stakeholders, security review and procurement.</small></td>
-        <td>Professional, military and commercial buyer segments.<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Address security and procurement needs for institutional channels.</td>
-        <td>Separate agent for professional buyers.</td>
-        <td>Security requirements</td></tr>
+        <td data-label="Account signal">Professional, military and commercial buyer segments.<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Address security and procurement needs for institutional channels.</td>
+        <td data-label="Example">Separate agent for professional buyers.</td>
+        <td data-label="To qualify">Security requirements</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 3 of 5">3/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>Separate US and Canadian stores.<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Scope agents per store and buyer group.</td>
-        <td>Recreational US and Canada first.</td>
-        <td>Stores · Volume</td></tr>
+        <td data-label="Account signal">Separate US and Canadian stores.<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Scope agents per store and buyer group.</td>
+        <td data-label="Example">Recreational US and Canada first.</td>
+        <td data-label="To qualify">Stores · Volume</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 3 of 5">3/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>ERP keeps US and Canadian stores in sync.<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Plan data access through the ERP.</td>
-        <td>Catalog-only answers first.</td>
-        <td>ERP access · Owner</td></tr>
+        <td data-label="Account signal">ERP keeps US and Canadian stores in sync.<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Plan data access through the ERP.</td>
+        <td data-label="Example">Catalog-only answers first.</td>
+        <td data-label="To qualify">ERP access · Owner</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 3 of 5">3/5</span><small>Grow the account after first success.</small></td>
-        <td>International and retail expansion planned.<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Add markets and in-store use as they launch.</td>
-        <td>Add new markets to the agreement.</td>
-        <td>Launch plans</td></tr>
+        <td data-label="Account signal">International and retail expansion planned.<small><a href="https://www.shopify.com/case-studies/mustang-survival" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Add markets and in-store use as they launch.</td>
+        <td data-label="Example">Add new markets to the agreement.</td>
+        <td data-label="To qualify">Launch plans</td></tr>
     </table></div>
     
   </section>
+  </div>
+  </div>
 </article>
-<article class="account" id="planeta-huerto">
+<article class="account" id="planeta-huerto" style="--accent:#b48fcf">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">09</span><h1>Planeta Huerto</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Garden marketplace · Spain</p>
@@ -1176,6 +1269,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with marketplace product discovery. Mixed-basket shipping questions are the distinctive second angle.</p>
   <div class="logic"><b>Rubric → strategy.</b> R1 = 2 and R2 = 2 support discovery. S2 = 2 and O3 = 3 point to shipping questions across sellers and systems. Strongest AE reason: A3 = 4, Shopify, Mirakl and Odoo.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -1209,28 +1304,29 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> Split-shipment contact volume</li><li><b>Value:</b> Handling time</li><li><b>Feasibility:</b> Mirakl data access</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C2, C3, C4, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg>C2 · Priority &amp; Timing</span> <span class="score" title="Score 2 of 5">2/5</span></td>
-        <td>An active project to prepare product data for AI shopping agents.</td>
-        <td><b>Already thinking about AI.</b><small>Caveat: It may build its own.</small></td>
-        <td>AI initiative<small><a href="https://www.shopify.com/case-studies/planeta-huerto" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">An active project to prepare product data for AI shopping agents.</td>
+        <td data-label="What it means"><b>Already thinking about AI.</b><small>Caveat: It may build its own.</small></td>
+        <td data-label="Signal · source">AI initiative<small><a href="https://www.shopify.com/case-studies/planeta-huerto" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg>C3 · Competitive Attractiveness</span> <span class="score" title="Score 2 of 5">2/5</span></td>
-        <td>Freshdesk, with no customer-facing AI assistant visible.</td>
-        <td><b>Helpdesk without a visible AI layer.</b><small>Caveat: Own AI project may overlap.</small></td>
-        <td>Helpdesk without AI<small>Live site check</small></td></tr>
+        <td data-label="Evidence">Freshdesk, with no customer-facing AI assistant visible.</td>
+        <td data-label="What it means"><b>Helpdesk without a visible AI layer.</b><small>Caveat: Own AI project may overlap.</small></td>
+        <td data-label="Signal · source">Helpdesk without AI<small>Live site check</small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7H5a2 2 0 0 1 0-4h12v4M3 5v14a2 2 0 0 0 2 2h15V7"/><path d="M20 12h-6v5h6m-3-2.5h.1"/></svg>C4 · Purchasing Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>Shopify, Mirakl and Odoo with custom integrations.</td>
-        <td><b>Significant platform investment.</b></td>
-        <td>Recent tech investment<small><a href="https://www.shopify.com/case-studies/planeta-huerto" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Shopify, Mirakl and Odoo with custom integrations.</td>
+        <td data-label="What it means"><b>Significant platform investment.</b></td>
+        <td data-label="Signal · source">Recent tech investment<small><a href="https://www.shopify.com/case-studies/planeta-huerto" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 2 of 5">2/5</span></td>
-        <td>Runs several connected systems.</td>
-        <td><b>Technical capability.</b><small>Caveat: Implementation may be complex.</small></td>
-        <td>Integration experience<small><a href="https://www.shopify.com/case-studies/planeta-huerto" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">Runs several connected systems.</td>
+        <td data-label="What it means"><b>Technical capability.</b><small>Caveat: Implementation may be complex.</small></td>
+        <td data-label="Signal · source">Integration experience<small><a href="https://www.shopify.com/case-studies/planeta-huerto" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Message Pablo Sánchez on LinkedIn, in Spanish, asking what its AI data project leaves uncovered for customers.</p></div></div>
   </section>
@@ -1241,25 +1337,27 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 2 of 5">2/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>Several markets and journeys.</td>
-        <td>Scope by demand per workflow.</td>
-        <td>Discovery first, then shipping.</td>
-        <td>Volume per workflow</td></tr>
+        <td data-label="Account signal">Several markets and journeys.</td>
+        <td data-label="What the AE does">Scope by demand per workflow.</td>
+        <td data-label="Example">Discovery first, then shipping.</td>
+        <td data-label="To qualify">Volume per workflow</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 4 of 5">4/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>Shopify, Mirakl and Odoo run different product and fulfillment functions.<small><a href="https://www.shopify.com/case-studies/planeta-huerto" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Coordinate data owners and custom actions across systems.</td>
-        <td>Test answers across own stock and marketplace products before launch.</td>
-        <td>APIs · Seller data · Owners</td></tr>
+        <td data-label="Account signal">Shopify, Mirakl and Odoo run different product and fulfillment functions.<small><a href="https://www.shopify.com/case-studies/planeta-huerto" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Coordinate data owners and custom actions across systems.</td>
+        <td data-label="Example">Test answers across own stock and marketplace products before launch.</td>
+        <td data-label="To qualify">APIs · Seller data · Owners</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 2 of 5">2/5</span><small>Grow the account after first success.</small></td>
-        <td>Other European markets.</td>
-        <td>Expand by market.</td>
-        <td>Add Portugal after Spain.</td>
-        <td>Pilot results</td></tr>
+        <td data-label="Account signal">Other European markets.</td>
+        <td data-label="What the AE does">Expand by market.</td>
+        <td data-label="Example">Add Portugal after Spain.</td>
+        <td data-label="To qualify">Pilot results</td></tr>
     </table></div>
     <div class="logic small">A1 (sales-assisted conversion) is discovery only.</div>
   </section>
+  </div>
+  </div>
 </article>
-<article class="account" id="footdistrict">
+<article class="account" id="footdistrict" style="--accent:#c98b8b">
   <a class="toplink" href="#briefs">Back to accounts ↑</a>
   <div class="account-title"><span class="number">10</span><h1>FOOTDISTRICT</h1></div>
   <p class="eyebrow">Enterprise AE account brief · Sneakers and streetwear · Spain</p>
@@ -1270,6 +1368,8 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
   <p class="thesis">Lead with sneaker sizing guidance. Multilingual consistency is the second angle. The weakest account that passed.</p>
   <div class="logic"><b>Rubric → strategy.</b> R1 = 2 and R2 = 2 support sizing guidance. O3 = 2 supports multilingual consistency. S3 = 2 makes returns a discovery angle. Strongest AE reason: A3 = 3, returns run through Reveni and need custom actions.</div>
 
+  <div class="cols">
+  <div class="col col-left">
   <h2>Pillar 1 · Merchant Economic Opportunity</h2>
   <p class="muted">Angles are ranked by the rubric: highest-scoring criteria lead; criteria at 1 stay as discovery questions.</p>
   
@@ -1318,20 +1418,21 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <tr><th><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg>Discovery &amp; qualification</span></th><td><ul class="tight"><li><b>Problem:</b> Returns contact volume</li><li><b>Value:</b> Handling time</li><li><b>Feasibility:</b> Reveni API</li></ul></td></tr>
   </table>
 </section>
-
+  </div>
+  <div class="col col-right">
   <section class="section">
     <h2>Pillar 2 · Chatbase Commercial Opportunity</h2>
     <p class="muted">Only criteria scored 2 (plausible) or higher are shown: C2, C5. The rest scored 1 and are open questions for the first call.</p>
     <div class="table-scroll"><table class="commercial">
       <tr><th>ICP criterion</th><th>Evidence</th><th>What it means</th><th>Signal · source</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg>C2 · Priority &amp; Timing</span> <span class="score" title="Score 2 of 5">2/5</span></td>
-        <td>The CTO named AI as a focus after migrating from Magento to Shopify.</td>
-        <td><b>AI is on the technology agenda.</b><small>Caveat: CX priority unconfirmed.</small></td>
-        <td>Leadership AI statement<small><a href="https://www.shopify.com/case-studies/footdistrict" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">The CTO named AI as a focus after migrating from Magento to Shopify.</td>
+        <td data-label="What it means"><b>AI is on the technology agenda.</b><small>Caveat: CX priority unconfirmed.</small></td>
+        <td data-label="Signal · source">Leadership AI statement<small><a href="https://www.shopify.com/case-studies/footdistrict" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></svg>C5 · Adoption Readiness</span> <span class="score" title="Score 3 of 5">3/5</span></td>
-        <td>The ecommerce team evaluates Shopify apps, with IT support for integrations.</td>
-        <td><b>Ecommerce team can act on its own.</b></td>
-        <td>Documented team workflow<small><a href="https://www.shopify.com/case-studies/footdistrict" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
+        <td data-label="Evidence">The ecommerce team evaluates Shopify apps, with IT support for integrations.</td>
+        <td data-label="What it means"><b>Ecommerce team can act on its own.</b></td>
+        <td data-label="Signal · source">Documented team workflow<small><a href="https://www.shopify.com/case-studies/footdistrict" target="_blank" rel="noopener">Shopify case study</a></small></td></tr>
     </table></div>
     <div class="outreach"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5a10 10 0 0 0 0 14m14-14a10 10 0 0 1 0 14M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M9 22l3-10 3 10"/><circle cx="12" cy="9" r="2"/></svg><div><strong>Outreach approach</strong><p>Message Antonio Alonso on LinkedIn, in Spanish, with a three-question sizing example, or ask Webimpacto, its migration agency, for an intro.</p></div></div>
   </section>
@@ -1342,23 +1443,25 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
     <div class="table-scroll"><table class="ae">
       <tr><th>Criterion</th><th>Account signal</th><th>What the AE does</th><th>Example</th><th>To qualify</th></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 6-6 4 4 8-11m-6 0h6v6"/></svg>A2 · Contract-value uplift</span> <span class="score" title="Score 2 of 5">2/5</span><small>Justify a larger scope than self-serve would buy.</small></td>
-        <td>Seven languages and several journeys.<small><a href="https://www.shopify.com/case-studies/footdistrict" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Size usage by language.</td>
-        <td>Spanish and English first.</td>
-        <td>Usage by language</td></tr>
+        <td data-label="Account signal">Seven languages and several journeys.<small><a href="https://www.shopify.com/case-studies/footdistrict" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Size usage by language.</td>
+        <td data-label="Example">Spanish and English first.</td>
+        <td data-label="To qualify">Usage by language</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1"/><rect x="15" y="15" width="7" height="7" rx="1"/><path d="M5 9v9h10"/></svg>A3 · Implementation &amp; time to value</span> <span class="score" title="Score 3 of 5">3/5</span><small>Reduce rollout risk and reach value faster.</small></td>
-        <td>Returns through Reveni; search through Doofinder.<small><a href="https://www.shopify.com/case-studies/footdistrict" target="_blank" rel="noopener">Shopify case study</a></small></td>
-        <td>Scope custom actions for the Reveni returns flow.</td>
-        <td>Test returns answers against Reveni before launch.</td>
-        <td>Reveni API · Integration owner</td></tr>
+        <td data-label="Account signal">Returns through Reveni; search through Doofinder.<small><a href="https://www.shopify.com/case-studies/footdistrict" target="_blank" rel="noopener">Shopify case study</a></small></td>
+        <td data-label="What the AE does">Scope custom actions for the Reveni returns flow.</td>
+        <td data-label="Example">Test returns answers against Reveni before launch.</td>
+        <td data-label="To qualify">Reveni API · Integration owner</td></tr>
       <tr><td class="criterion"><span class="icon-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="4" r="2"/><circle cx="18" cy="10" r="2"/><circle cx="6" cy="20" r="2"/><path d="M6 6v12m0-6c6 0 4-2 10-2"/></svg>A4 · Expansion unlocked by sales</span> <span class="score" title="Score 2 of 5">2/5</span><small>Grow the account after first success.</small></td>
-        <td>Returns and policy questions as a next step.</td>
-        <td>Add returns after the sizing pilot.</td>
-        <td>Phase two: returns.</td>
-        <td>Pilot results</td></tr>
+        <td data-label="Account signal">Returns and policy questions as a next step.</td>
+        <td data-label="What the AE does">Add returns after the sizing pilot.</td>
+        <td data-label="Example">Phase two: returns.</td>
+        <td data-label="To qualify">Pilot results</td></tr>
     </table></div>
     <div class="logic small">A1 (sales-assisted conversion) is discovery only.</div>
   </section>
+  </div>
+  </div>
 </article>
 </main>
 <footer>Sources: Chatbase customer stories, documentation and pricing; Gorgias documentation; Shopify case studies for each account; Arhaus FY2025 10-K and Q2 2026 earnings materials; live storefront checks (October 2026). Chat examples are illustrative, not real interactions.</footer>
