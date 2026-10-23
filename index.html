@@ -170,6 +170,9 @@ footer { max-width:1180px; margin:0 auto; padding:24px 38px 48px; color:var(--mu
 @media print { .theme { background:none; border:0; padding:0; } }
 
 /* ---------- task-grouped menu bar ---------- */
+.maphead { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; }
+.maphead .hint { font-size:13px; font-weight:400; color:var(--task); }
+@media (max-width:780px) { .maphead .hint::before { content:"Tap an item to see its script"; } .maphead .hint { font-size:0; } .maphead .hint::before { font-size:13px; } }
 .bar a.home { border:0; color:var(--text); margin-right:auto; }
 .bar a.home:hover strong { color:#fff; }
 .bar a.home strong { margin-right:0; }
@@ -1739,7 +1742,7 @@ details.facts table { font-size:14px; }
 </div>
 
 <div class="tblock" id="t2-map">
-  <h3>The map: 21 days</h3>
+  <h3 class="maphead">The map: 21 days <span class="hint">Click any icon to see its script</span></h3>
   <div class="legend"><span class="legend-c"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email</span><span class="legend-c"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg> Call + voicemail</span><span class="legend-c"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M19 8v6M16 11h6"/></svg> LinkedIn connect</span><span class="legend-c"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg> LinkedIn message</span></div>
   <div class="timeline">
     <div class="lane-label" style="--lane:1">Moss</div><div class="lane-label" style="--lane:2">Veltri</div><div class="lane-label" style="--lane:3">Bauer</div>
